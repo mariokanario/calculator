@@ -1,7 +1,7 @@
 import {
     createBrowserRouter,
 } from "react-router-dom";
-import Home from "../pages/home";
+import Home from "../pages/Home";
 import Type from "../pages/Type";
 import Adjust from "../pages/Adjust";
 import Meter from "../pages/Meter";
