@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom';
 import First from '../components/First';
 import Breadcrumb from '../components/Breadcrumb';
-import Transition from '../transition';
+import Transition from '../components/Transition';
 
 
 const Type = () => {

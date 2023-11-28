@@ -1,7 +1,7 @@
 import React from 'react'
 import MeterForm from '../components/MeterForm'
 import Breadcrumb from '../components/Breadcrumb'
-import Transition from '../transition'
+import Transition from '../components/Transition'
 
 const Meter = () => {
     return (

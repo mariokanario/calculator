@@ -7,7 +7,7 @@ import IntInt from '../components/IntInt';
 import ExtInt from '../components/ExtInt';
 import ExtExt from '../components/ExtExt';
 import Breadcrumb from '../components/Breadcrumb';
-import Transition from '../transition';
+import Transition from '../components/Transition';
 
 const Adjust = () => {
 

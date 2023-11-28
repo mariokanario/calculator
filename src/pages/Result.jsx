@@ -3,7 +3,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKey
 import { FaFileDownload } from "react-icons/fa";
 import { MdAttachEmail } from "react-icons/md";
 import { IoLogoWhatsapp } from "react-icons/io";
-import Transition from '../transition';
+import Transition from '../components/Transition';
 
 const Result = () => {
 
