@@ -1,6 +1,6 @@
 import React from 'react'
 import { RadioGroup, Radio, Button } from "@nextui-org/react";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 const ExtExt = () => {
@@ -40,7 +40,11 @@ const ExtExt = () => {
 
 
                 </div>
-                <div className='flex justify-center'>
+                <div className='flex justify-center gap-5'>
+                    <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
+                        <FaChevronLeft />
+                        Anterior
+                    </Button>
                     <Button className='my-8' size="lg" color="primary" onPress={() => navigate("/meter?type=extExt")}>
                         Siguiente
                         <FaChevronRight />

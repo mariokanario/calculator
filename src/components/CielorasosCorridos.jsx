@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { RadioGroup, Radio, Button, Slider } from "@nextui-org/react";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
-const PlafonesCorridos = () => {
+const CielorasosCorridos = () => {
 
     const navigate = useNavigate();
 
@@ -26,20 +26,17 @@ const PlafonesCorridos = () => {
                         {
                             option == "interior" &&
                             <>
-                                <Radio value="Light 12.7 mm">Light 12.7 mm</Radio>
-                                <Radio value="RH 12.7 mm">RH 12.7 mm</Radio>
-                                <Radio value="RH 15.9 mm">RH 15.9 mm</Radio>
-                                <Radio value="RF 12.7 mm">RF 12.7 mm</Radio>
-                                <Radio value="RF 15.9 mm">RF 15.9 mm</Radio>
-                                <Radio value="Anti Moho 12.7 mm">Anti Moho 12.7 mm</Radio>
-                                <Radio value="Acustik 12 mm">Acustik 12 mm</Radio>
+                                <Radio value="Frescasa Eco 2,5">Frescasa Eco 2,5"</Radio>
+                                <Radio value="Frescasa Eco 3,5">Frescasa Eco 3,5"</Radio>
+                                <Radio value="Isover Arena">Isover Arena</Radio>
                             </>
                         }
                         {
                             option == "exterior" &&
                             <>
-                                <Radio value="AquarocMax 11 mm">AquarocMax 11 mm</Radio>
-                                <Radio value="X-terium 12.7 mm">X-terium 12.7 mm</Radio>
+                                <Radio value="Isover Arena">Isover Arena</Radio>
+                                <Radio value="Frescasa con Foil 3,5">Frescasa con Foil 3,5"</Radio>
+                                <Radio value="Frescasa con Foil 2,5">Frescasa con Foil 2,5"</Radio>
                             </>
                         }
                     </RadioGroup>
@@ -108,8 +105,12 @@ const PlafonesCorridos = () => {
 
 
                 </div>
-                <div className='flex justify-center'>
-                    <Button size="lg" className='my-8' color="primary" onPress={() => navigate("/meter?type=plafonesCorridos")}>
+                <div className='flex justify-center gap-5'>
+                    <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
+                        <FaChevronLeft />
+                        Anterior
+                    </Button>
+                    <Button size="lg" className='my-8' color="primary" onPress={() => navigate("/meter?type=cielorasosCorridos")}>
                         Siguiente
                         <FaChevronRight />
                     </Button>
@@ -119,4 +120,4 @@ const PlafonesCorridos = () => {
     )
 }
 
-export default PlafonesCorridos
+export default CielorasosCorridos

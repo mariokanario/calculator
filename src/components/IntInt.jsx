@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { RadioGroup, Radio, Button, Slider } from "@nextui-org/react";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 const IntInt = () => {
@@ -48,8 +48,13 @@ const IntInt = () => {
 
                     <RadioGroup>
                         <h2 className='title-radio'>Aislante</h2>
-                        <Radio value="Sin Aislante">Sin Aislante</Radio>
-                        <Radio value="Fibra de Vidrio 2 1/2">Fibra de Vidrio 2 1/2"</Radio>
+                        <Radio value="Frescasa Eco 2,5">Frescasa Eco 2,5"</Radio>
+                        <Radio value="Frescasa Eco 3,5">Frescasa Eco 3,5"</Radio>
+                        <Radio value="Isover Arena">Isover Arena</Radio>
+                        <Radio value="Acustifibra">Acustifibra</Radio>
+                        <Radio value="Acustic Control VP">Acustic Control VP</Radio>
+                        <Radio value="Black Theater 1">Black Theater 1"</Radio>
+                        <Radio value="Black Theater 2">Black Theater 2"</Radio>
                     </RadioGroup>
 
                     <RadioGroup>
@@ -80,7 +85,11 @@ const IntInt = () => {
                     </RadioGroup>
 
                 </div>
-                <div className='flex justify-center'>
+                <div className='flex justify-center gap-5'>
+                    <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
+                        <FaChevronLeft />
+                        Anterior
+                    </Button>
                     <Button className='my-8' size="lg" color="primary" onPress={() => navigate("/meter?type=intInt")}>
                         Siguiente
                         <FaChevronRight />

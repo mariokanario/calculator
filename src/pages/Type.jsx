@@ -1,58 +1,62 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import First from '../components/First';
 import Breadcrumb from '../components/Breadcrumb';
 import Transition from '../components/Transition';
+import { Button } from '@nextui-org/react';
+import { FaChevronLeft } from 'react-icons/fa';
 
 
 const Type = () => {
 
   const listFirst = [
     {
-      title: "Plafones",
-      img: "/img/plafones.png",
-      href: "/type?type=plafones",
+      title: "Cielorasos",
+      img: "/img/cieloraso.jpg",
+      href: "/type?type=cielorasos",
     },
     {
       title: "Muros",
-      img: "/img/muros.png",
+      img: "/img/muro.jpg",
       href: "/type?type=muros",
     },
 
   ];
 
-  const listPlafones = [
+  const listCielorasos = [
     {
-      title: "Plafones corridos",
-      img: "/img/plafon_corrido.png",
-      href: "/adjust?type=plafonesCorridos",
+      title: "Cieloraso Corrido",
+      img: "/img/cieloraso_corrido.jpg",
+      href: "/adjust?type=cielorasosCorridos",
     },
     {
-      title: "Plafones reticulares",
-      img: "/img/plafon_reticular.png",
-      href: "/adjust?type=plafonesReticulares",
+      title: "Cieloraso Reticular",
+      img: "/img/cieloraso_reticular.jpg",
+      href: "/adjust?type=cielorasosReticulares",
     },
 
   ];
 
   const listMuros = [
     {
-      title: "Interior - Interior",
-      img: "/img/muro_sencillo_int_int.png",
+      title: "Muro Interior - Interior",
+      img: "/img/int_int.jpg",
       href: "/adjust?type=intInt",
     },
     {
-      title: "Exterior - Interior",
-      img: "/img/muro_sencillo_int_ext.png",
-      href: "/adjust?type=extInt",
+      title: "Muro Facahada",
+      img: "/img/muro_ext.jpg",
+      href: "/adjust?type=muroFachada",
     },
-    {
+    /*{
       title: "Exterior - Exterior",
       img: "/img/muro_ext_ext.png",
       href: "/adjust?type=extExt",
-    },
+    },*/
 
   ];
+
+  const navigate = useNavigate();
 
 
   const location = useLocation();
@@ -79,9 +83,9 @@ const Type = () => {
                 />
               ))
 
-              : type == "plafones" ?
+              : type == "cielorasos" ?
 
-                listPlafones.map((item, index) => (
+                listCielorasos.map((item, index) => (
                   <First
                     item={item}
                     key={index}
@@ -100,6 +104,12 @@ const Type = () => {
                   :
                   null
           }
+        </div>
+        <div className='flex justify-center gap-5'>
+          <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
+            <FaChevronLeft />
+            Anterior
+          </Button>
         </div>
       </div>
     </Transition>

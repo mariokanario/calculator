@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { RadioGroup, Radio, Button, Slider } from "@nextui-org/react";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
-const ExtInt = () => {
+const MuroFachada = () => {
 
     const navigate = useNavigate();
 
@@ -24,13 +24,13 @@ const ExtInt = () => {
 
                     <RadioGroup>
                         <h2 className='title-radio'>Cara 2</h2>
-                        <Radio value="Light 12.7 mm">Light 12.7 mm</Radio>
-                        <Radio value="RH 12.7 mm">RH 12.7 mm</Radio>
-                        <Radio value="RH 15.9 mm">RH 15.9 mm</Radio>
-                        <Radio value="RF 12.7 mm">RF 12.7 mm</Radio>
-                        <Radio value="RF 15.9 mm">RF 15.9 mm</Radio>
-                        <Radio value="Anti Moho 12.7 mm">Anti Moho 12.7 mm</Radio>
-                        <Radio value="Acustik 12 mm">Acustik 12 mm</Radio>
+                        <Radio value="Placa de Fibrocemento de 4 mm">Placa de Fibrocemento de 4 mm</Radio>
+                        <Radio value="Placa de Fibrocemento de 6 mm">Placa de Fibrocemento de 6 mm</Radio>
+                        <Radio value="Placa de Fibrocemento de 8 mm">Placa de Fibrocemento de 8 mm</Radio>
+                        <Radio value="Placa de Fibrocemento de 10 mm">Placa de Fibrocemento de 10 mm</Radio>
+                        <Radio value="Placa de Fibrocemento de 14 mm">Placa de Fibrocemento de 14 mm</Radio>
+                        <Radio value="Placa de Fibrocemento de 17 mm">Placa de Fibrocemento de 17 mm</Radio>
+                        <Radio value="Placa de Fibrocemento de 20 mm">Placa de Fibrocemento de 20 mm</Radio>
                     </RadioGroup>
 
 
@@ -44,8 +44,8 @@ const ExtInt = () => {
 
                     <RadioGroup>
                         <h2 className='title-radio'>Aislante</h2>
-                        <Radio value="Sin Aislante">Sin Aislante</Radio>
-                        <Radio value="Fibra de Vidrio 2 1/2">Fibra de Vidrio 2 1/2"</Radio>
+                        <Radio value="Isover Arena">Isover Arena</Radio>
+                        <Radio value="Ecovent ">Ecovent </Radio>
                     </RadioGroup>
 
                     <RadioGroup>
@@ -76,8 +76,12 @@ const ExtInt = () => {
                     </RadioGroup>
 
                 </div>
-                <div className='flex justify-center'>
-                    <Button className='my-8' size="lg" color="primary" onPress={() => navigate("/meter?type=extInt")}>
+                <div className='flex justify-center gap-5'>
+                    <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
+                        <FaChevronLeft />
+                        Anterior
+                    </Button>
+                    <Button className='my-8' size="lg" color="primary" onPress={() => navigate("/meter?type=muroFachada")}>
                         Siguiente
                         <FaChevronRight />
                     </Button>
@@ -87,4 +91,4 @@ const ExtInt = () => {
     )
 }
 
-export default ExtInt
+export default MuroFachada

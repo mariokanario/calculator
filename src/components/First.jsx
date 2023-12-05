@@ -10,7 +10,7 @@ const First = ({ item }) => {
 
     return (
         <>
-            <Card shadow="sm" isPressable onPress={() => navigate(href)}>
+            <Card shadow="sm" isPressable onPressEnd={() => navigate(href)}>
                 <CardBody className="overflow-visible p-0">
                     <Image
                         shadow="sm"

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Input, Tabs, Tab, CardBody, Card } from "@nextui-org/react";
-import { FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const MeterForm = () => {
@@ -26,14 +26,20 @@ const MeterForm = () => {
                             <Input className='place-self-center w-full md:w-1/2' type="text" label="Total" placeholder="350 m" />
                         </div>
                     </Tab>
-                    
-                </Tabs>
-            </div>  
 
-            <Button size="lg" className='my-8' color="primary" onPress={() => navigate("/result")}>
-                Calcular
-                <FaChevronRight />
-            </Button>
+                </Tabs>
+            </div>
+
+            <div className='flex justify-center gap-5'>
+                <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
+                    <FaChevronLeft />
+                    Anterior
+                </Button>
+                <Button size="lg" className='my-8' color="primary" onPress={() => navigate("/result")}>
+                    Calcular
+                    <FaChevronRight />
+                </Button>
+            </div>
 
         </>
     )

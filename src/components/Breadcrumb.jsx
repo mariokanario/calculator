@@ -13,20 +13,18 @@ const Breadcrumb = () => {
     const routesArray = {
         "/type?type=inicio": ["Inicio"],
 
-        "/type?type=plafones": ["Inicio", "Plafones"],
-        "/adjust?type=plafonesCorridos": ["Inicio", "Plafones", "Plafones corridos"],
-        "/adjust?type=plafonesReticulares": ["Inicio", "Plafones", "Plafones reticulares"],
+        "/type?type=cielorasos": ["Inicio", "Cielorasos"],
+        "/adjust?type=cielorasosCorridos": ["Inicio", "Cielorasos", "Cielorasos corridos"],
+        "/adjust?type=cielorasosReticulares": ["Inicio", "Cielorasos", "Cielorasos reticulares"],
 
         "/type?type=muros": ["Inicio", "Muros"],
-        "/adjust?type=intInt": ["Inicio", "Muros", "Interior-Exterior"],
-        "/adjust?type=extInt": ["Inicio", "Muros", "Exterior-Interior"],
-        "/adjust?type=extExt": ["Inicio", "Muros", "Exterior-Exterior"],
+        "/adjust?type=intInt": ["Inicio", "Muros", "Interior-Interior"],
+        "/adjust?type=muroFachada": ["Inicio", "Muros", "MuroFachada"],
 
-        "/meter?type=plafonesCorridos": ["Inicio", "Plafones", "Plafones corridos", "Materiales"],
-        "/meter?type=plafonesReticulares": ["Inicio", "Plafones", "Plafones reticulares", "Materiales"],
-        "/meter?type=intInt": ["Inicio", "Muros", "Interior-Exterior", "Materiales"],
-        "/meter?type=extInt": ["Inicio", "Muros", "Exterior-Interior", "Materiales"],
-        "/meter?type=extExt": ["Inicio", "Muros", "Exterior-Exterior", "Materiales"],
+        "/meter?type=cielorasosCorridos": ["Inicio", "Cielorasos", "Cielorasos corridos", "Materiales"],
+        "/meter?type=cielorasosReticulares": ["Inicio", "Cielorasos", "Cielorasos reticulares", "Materiales"],
+        "/meter?type=intInt": ["Inicio", "Muros", "Interior-Interior", "Materiales"],
+        "/meter?type=muroFachada": ["Inicio", "Muros", "MuroFachada", "Materiales"],
 
     }
 

@@ -1,11 +1,11 @@
 import React from 'react'
-import PlafonesCorridos from '../components/PlafonesCorridos';
+import CielorasosCorridos from '../components/CielorasosCorridos';
 import { useLocation } from 'react-router-dom';
-import PlafonesReticulares from '../components/PlafonesReticulares';
+import CielorasosReticulares from '../components/CielorasosReticulares';
 // import MuroLambrin from '../components/MuroLambrin';
 import IntInt from '../components/IntInt';
-import ExtInt from '../components/ExtInt';
-import ExtExt from '../components/ExtExt';
+import MuroFachada from '../components/MuroFachada';
+import ExtExt from '../components/_ExtExt';
 import Breadcrumb from '../components/Breadcrumb';
 import Transition from '../components/Transition';
 
@@ -23,14 +23,14 @@ const Adjust = () => {
 
 
                 {
-                    type == "plafonesCorridos" ?
-                        <PlafonesCorridos />
-                        : type == "plafonesReticulares" ?
-                            <PlafonesReticulares />
+                    type == "cielorasosCorridos" ?
+                        <CielorasosCorridos />
+                        : type == "cielorasosReticulares" ?
+                            <CielorasosReticulares />
                             : type == "intInt" ?
                                 <IntInt />
-                                : type == "extInt" ?
-                                    <ExtInt />
+                                : type == "muroFachada" ?
+                                    <MuroFachada />
                                     : type == "extExt" ?
                                         <ExtExt />
                                         :
