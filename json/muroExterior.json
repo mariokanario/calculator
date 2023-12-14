@@ -1,0 +1,99 @@
+{
+    "cara1": {
+        "AquarocMax 11 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "X-terium 12.7 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        }
+    },
+    "cara2": {
+        "AquarocMax 11 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "X-terium 12.7 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "Placa de Fibrocemento de 4 mm": {
+            "medida": "mt²",
+            "valor": 0.34
+        },
+        "Placa de Fibrocemento de 6 mm": {
+            "medida": "mt²",
+            "valor": 0.34
+        },
+        "Placa de Fibrocemento de 8 mm": {
+            "medida": "mt²",
+            "valor": 0.34
+        },
+        "Placa de Fibrocemento de 10 mm": {
+            "medida": "mt²",
+            "valor": 0.34
+        },
+        "Placa de Fibrocemento de 14 mm": {
+            "medida": "mt²",
+            "valor": 0.34
+        },
+        "Placa de Fibrocemento de 17 mm": {
+            "medida": "mt²",
+            "valor": 0.34
+        },
+        "Placa de Fibrocemento de 20 mm": {
+            "medida": "mt²",
+            "valor": 0.34
+        }
+    },
+    "aislante": {
+        "Isover Arena 60 (rollos 12,4 m2)": {
+            "medida": "mt²",
+            "valor": 0.0807
+        },
+        "Ecovent 80 (laminas 0,81m2)": {
+            "medida": "mt²",
+            "valor": 1.23457
+        }
+    },
+    "complementos": [
+        {
+            "material": "Metal - metal 26 - 1/2",
+            "medida": "pz",
+            "valor": 8
+        },
+        {
+            "material": "Cemento - metal 20 - 1 1/4",
+            "medida": "pz",
+            "valor": 16
+        },
+        {
+            "material": "Cinta Fibra de Vidrio E (10cm x 45m)",
+            "medida": "ml",
+            "valor": 2.4
+        },
+        {
+            "material": "Tyvek Stucco Wrap (1.50m x 61m)",
+            "medida": "ml",
+            "valor": 1.1
+        },
+        {
+            "material": "Cinta Dupont Tyvek (5cm x 50m)",
+            "medida": "ml",
+            "valor": 0.5
+        }
+    ],
+    "metales": [
+        {
+            "material": "Perfil base 6 (6.35cm x 3.05m)",
+            "medida": "ml",
+            "valor": 2.3
+        },
+        {
+            "material": "Perfil base 9 (8.9 cm x 3.05m)",
+            "medida": "ml",
+            "valor": 2.3
+        }
+    ]
+}

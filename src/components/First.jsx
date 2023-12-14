@@ -1,16 +1,23 @@
 import React from 'react'
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
+import { useProvider } from './context/Provider';
+
 
 const First = ({ item }) => {
 
     const navigate = useNavigate();
-
+    const { setMaterials, materials } = useProvider()
     const { title, img, href } = item
 
     return (
         <>
-            <Card shadow="sm" isPressable onPressEnd={() => navigate(href)}>
+            <Card shadow="sm" isPressable onPressEnd={() =>{
+                let item = materials
+                item.tipo =  title
+                setMaterials({ ...item })
+                navigate(href)
+            } }>
                 <CardBody className="overflow-visible p-0">
                     <Image
                         shadow="sm"

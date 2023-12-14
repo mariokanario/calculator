@@ -1,77 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Card, Button } from "@nextui-org/react";
 import { FaFileDownload } from "react-icons/fa";
 import { MdAttachEmail } from "react-icons/md";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Transition from '../components/Transition';
+import { useProvider } from './../components/context/Provider';
+import datosCielorasoCorridoInt from './../../json/cielorasoCorridoInt.json'
+import datosCielorasoCorridoExt from './../../json/cielorasoCorridoExt.json'
+import datosCielorasoReticular from './../../json/cielorasoReticular.json'
+import datosMuroInterior from './../../json/muroInterior.json'
+import datosMuroExterior from './../../json/muroExterior.json'
 
 const Result = () => {
 
-    const rows = [
-        {
-            key: "1",
-            material: "Tornillos Plaka yeso - metal 20 de 1”",
-            cantidad: "4,326",
-            unidad: "pza",
-        },
-        {
-            key: "2",
-            material: "Tornillos Plaka metal- metal 20 de 1/2",
-            cantidad: "1,442",
-            unidad: "pza",
-        },
-        {
-            key: "3",
-            material: "Tornillos Plaka cemento - metal 20 de 1 1/4",
-            cantidad: "6,129",
-            unidad: "pza",
-        },
-        {
-            key: "4",
-            material: "PU Fix Tek bond (280 ml)",
-            cantidad: "47",
-            unidad: "Cartucho",
-        },
-        {
-            key: "5",
-            material: "Tornillos Plaka yeso - metal 20 de 1”",
-            cantidad: "4,326",
-            unidad: "pza",
-        },
-        {
-            key: "6",
-            material: "Tornillos Plaka metal- metal 20 de 1/2",
-            cantidad: "1,442",
-            unidad: "pza",
-        },
-        {
-            key: "7",
-            material: "Tornillos Plaka cemento - metal 20 de 1 1/4",
-            cantidad: "6,129",
-            unidad: "pza",
-        },
-        {
-            key: "8",
-            material: "PU Fix Tek bond (280 ml)",
-            cantidad: "47",
-            unidad: "Cartucho",
-        },
-    ];
+    const { materials } = useProvider()
 
-    const columns = [
-        {
-            key: "material",
-            label: "Material",
-        },
-        {
-            key: "cantidad",
-            label: "Cantidad",
-        },
-        {
-            key: "unidad",
-            label: "Unidad de venta",
-        },
-    ];
+    const data = () => {
+        if (materials.tipo == "Cieloraso Corrido" && materials.subtipo == "interior") return datosCielorasoCorridoInt
+
+        if (materials.tipo == "Cieloraso Corrido" && materials.subtipo == "exterior") return datosCielorasoCorridoExt
+
+        if (materials.tipo == "Cieloraso Reticular") return datosCielorasoReticular
+
+        if (materials.tipo == "Muro Interior - Interior") return datosMuroInterior
+
+        if (materials.tipo == "Muro Facahada") return datosMuroExterior
+    }
+
+    const datosJson = data();
+
+    console.log(datosJson, materials);
 
     return (
         <Transition>
@@ -79,18 +37,120 @@ const Result = () => {
 
                 <h2 className='text-2xl font-bold'>Resultado </h2>
 
-                <Table className='mt-5'>
-                    <TableHeader columns={columns}>
-                        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+                <div className="gap-4 grid grid-cols-1 md:grid-cols-3 mt-6">
+                    <div className='my-5'>
+                        <p className='font-semibold'>Tipo:</p>
+                        <p>{materials.tipo}</p>
+                    </div>
+
+                    <div className='my-5'>
+                        <p className='font-semibold'>Desperdicio:</p>
+                        <p>{materials.desperdicio} %</p>
+                    </div>
+
+                    <div className='my-5'>
+                        <p className='font-semibold'>Metros cuadrados:</p>
+                        <p>{materials.metrocuadrado} m²</p>
+                    </div>
+                </div>
+
+                <Table aria-label="Example static collection table">
+                    <TableHeader>
+                        <TableColumn>Material</TableColumn>
+                        <TableColumn>Unidad de medida</TableColumn>
+                        <TableColumn>Unidad de venta</TableColumn>
                     </TableHeader>
-                    <TableBody items={rows}>
-                        {(item) => (
-                            <TableRow key={item.key}>
-                                {(columnKey) => <TableCell className='text-left'>{getKeyValue(item, columnKey)}</TableCell>}
-                            </TableRow>
-                        )}
+
+                    <TableBody>
+                        {
+                            materials?.values?.map((material, i) => (
+                                <TableRow key={i} className='text-left'>
+                                    <TableCell>
+                                        {material.nombre}
+                                    </TableCell>
+                                    <TableCell>
+                                        {datosJson[material.tipo][material.nombre].medida}
+                                    </TableCell>
+                                    <TableCell>
+                                        {Math.round(datosJson[material.tipo][material.nombre].valor * materials.metrocuadrado)}
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        }
+
+                        {
+                            datosJson.complementos != undefined ?
+                                <TableRow className='text-left'>
+                                    <TableCell>
+                                        <h2 className='font-semibold text-base'>Complementos</h2>
+                                    </TableCell>
+                                    <TableCell></TableCell>
+                                    <TableCell></TableCell>
+                                </TableRow>
+
+                                : null
+                        }
+
+                        {
+                            datosJson.complementos != undefined ?
+
+                                datosJson.complementos.map((complemento, i) => (
+                                    <TableRow key={i} className='text-left'>
+                                        <TableCell>
+                                            {complemento.material}
+                                        </TableCell>
+                                        <TableCell>
+                                            {complemento.medida}
+                                        </TableCell>
+                                        <TableCell>
+                                            {Math.round(complemento.valor * materials.metrocuadrado)}
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+
+                                : null
+                        }
+
+                        {
+                            datosJson.metales != undefined ?
+                                <TableRow className='text-left'>
+                                    <TableCell>
+                                        <h2 className='font-semibold text-base'>Metales</h2>
+                                    </TableCell>
+                                    <TableCell></TableCell>
+                                    <TableCell></TableCell>
+                                </TableRow>
+
+                                : null
+                        }
+
+
+
+                        {
+                            datosJson.metales != undefined ?
+
+                                datosJson.metales.map((metal, i) => (
+                                    <TableRow key={i} className='text-left'>
+                                        <TableCell>
+                                            {metal.material}
+                                        </TableCell>
+                                        <TableCell>
+                                            {metal.medida}
+                                        </TableCell>
+                                        <TableCell>
+                                            {Math.round(metal.valor * materials.metrocuadrado)}
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+
+                                : null
+
+                        }
+
                     </TableBody>
                 </Table>
+
+
 
                 <h3 className='text-lg mt-5 font-bold text-left'>Notas</h3>
                 <ul className='list-disc text-left text-sm pl-4'>
@@ -102,7 +162,7 @@ const Result = () => {
                     <li>Se considera 3% de desperdicio.</li>
                 </ul>
 
-                <Card className='fixed w-4/6  menu-result flex flex-row box-border p-5 justify-center justify-around'>
+                <Card className='fixed w-4/6  menu-result flex flex-row box-border p-5 justify-around'>
                     <Button size="lg" className='text-xl' isIconOnly color="primary">
                         <FaFileDownload />
                     </Button>
@@ -114,7 +174,7 @@ const Result = () => {
                     </Button>
                 </Card>
             </div>
-        </Transition>
+        </Transition >
     )
 }
 

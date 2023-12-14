@@ -1,0 +1,84 @@
+{
+    "placa": {
+        "Light 12.7 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "RH 12.7 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "RH 15.9 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "RF 12.7 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "RF 15.9 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "Anti Moho 12.7 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        },
+        "Acustik 12 mm": {
+            "medida": "mt²",
+            "valor": 1.1
+        }
+    },
+    "aislante": {
+        "Frescasa Eco 2,5 (rollos de 9 m2)": {
+            "medida": "mt²",
+            "valor": 0.1111
+        },
+        "Frescasa Eco 3,5 (rollos de 9 m2)": {
+            "medida": "mt²",
+            "valor": 0.1111
+        },
+        "Isover Arena 60 (rollos 12,4 m2)": {
+            "medida": "mt²",
+            "valor": 0.0806
+        },
+        "Sin aislante": {
+            "medida": "mt²",
+            "valor": 0
+        }
+    },
+    "complementos": [
+        {
+            "material": "Yeso - metal 26 - 1",
+            "medida": "pz",
+            "valor": 16
+        },
+        {
+            "material": "Cinta para Juntas (5cm x 76.2m)",
+            "medida": "ml",
+            "valor": 2.4
+        },
+        {
+            "material": "Aislatech R8 2.5' (61 x 1524cm)",
+            "medida": "mt²",
+            "valor": 1.1
+        }
+    ],
+    "metales": [
+        {
+            "material": "Canal Listón 26 (6.35cm x 3.05m)",
+            "medida": "ml",
+            "valor": 2.3
+        },
+        {
+            "material": "Canaleta Carga 22 (1 5/8'(4.10cm) x 3.05m)",
+            "medida": "ml",
+            "valor": 1.8
+        },
+        {
+            "material": "Ángulo Metálico 20 (1' x 1' x 3.05m)",
+            "medida": "ml",
+            "valor": 1.1
+        }
+    ]
+}

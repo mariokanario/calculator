@@ -4,13 +4,23 @@ export const Context = createContext();
 
 const Provider = ({ children }) => {
 
-  const [breadNav, setBreadNav] = useState("hola");
+  const [materials, setMaterials] = useState({
+    "desperdicio": null,
+    "tipo": null,
+    "subtipo" : null,
+    "values" : []
+  });
 
   return (
-    <Context.Provider value={{ breadNav, setBreadNav }}>
+    <Context.Provider value={ {materials, setMaterials} }>
       {children}
     </Context.Provider>
   );
 };
+
+export const useProvider = () => {
+  return useContext(Context)
+}
+
 
 export default Provider;

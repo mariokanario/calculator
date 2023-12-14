@@ -1,0 +1,64 @@
+{
+    "placa": {
+        "Sky Clean 60,3 cm x 60,3 cm": {
+            "medida": "mt²",
+            "valor": 2.7548
+        },
+        "Urban 60,3 cm x 60,3 cm": {
+            "medida": "mt²",
+            "valor": 2.7548
+        },
+        "Duracustic 1,22m x 0,61 m": {
+            "medida": "mt²",
+            "valor": 1.3661
+        },
+        "Clouds 1 1, 22 m X 2, 40 m": {
+            "medida": "mt²",
+            "valor": 0.3356
+        },
+        "Black Theater 1 1, 22 m X 2, 40 m": {
+            "medida": "mt²",
+            "valor": 0.3356
+        },
+        "Clouds 2 1, 22 m X 2, 40 m": {
+            "medida": "mt²",
+            "valor": 0.3356
+        },
+        "Black Theater 2 1, 22 m X 2, 40 m": {
+            "medida": "mt²",
+            "valor": 0.3356
+        }
+    },
+    "suspencion": {
+        "T Principal (3.66m)": {
+            "medida": "pz",
+            "valor": 0.25
+        },
+        "T Secundaria (61cm)": {
+            "medida": "pz",
+            "valor": 1.42
+        },
+        "T Secundaria (1.22m)": {
+            "medida": "pz",
+            "valor": 1.42
+        },
+        "Ángulo Perimetral (3.05m)": {
+            "medida": "pz",
+            "valor": 1
+        }
+    },
+    "acabado": {
+        "Masilla Acrilica": {
+            "medida": "Cuñete",
+            "valor": 0.5
+        },
+        "Sin Acabado": {
+            "medida": "N/A",
+            "valor": 0
+        },
+        "5 Plaka Finish": {
+            "medida": "kg/mt²",
+            "valor": 0.1111
+        }
+    }
+}
