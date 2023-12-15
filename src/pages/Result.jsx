@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Card, Button } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Card, Button, CardBody } from "@nextui-org/react";
 import { FaFileDownload } from "react-icons/fa";
 import { MdAttachEmail } from "react-icons/md";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -13,7 +13,8 @@ import datosMuroExterior from './../../json/muroExterior.json'
 
 const Result = () => {
 
-    const { materials } = useProvider()
+    const { materials, userData } = useProvider()
+
 
     const data = () => {
         if (materials.tipo == "Cieloraso Corrido" && materials.subtipo == "interior") return datosCielorasoCorridoInt
@@ -37,7 +38,44 @@ const Result = () => {
 
                 <h2 className='text-2xl font-bold'>Resultado </h2>
 
-                <div className="gap-4 grid grid-cols-1 md:grid-cols-3 mt-6">
+                <div className="result-info" style={{width: "100%"}}>
+                    <Card className='col-span-1 md:col-span-3 '>
+                        <CardBody className='gap-4 p-10 grid grid-cols-2 md:grid-cols-3'>
+
+                            <img className='mb-10 mx-auto col-span-2 md:col-span-3' src="./img/logo.svg" alt="" style={{ width: "180px" }} />
+
+
+                            <div>
+                                <h4 className='font-semibold'>Cliente: </h4>
+                                <p>{userData.name}</p>
+                            </div>
+                            <div>
+                                <h4 className='font-semibold'>Documento: </h4>
+                                <p>{userData.typeDocument + " " + userData.document}</p>
+                            </div>
+                            <div>
+                                <h4 className='font-semibold'>Email: </h4>
+                                <p>{userData.email}</p>
+                            </div>
+                            <div>
+                                <h4 className='font-semibold'>Celular: </h4>
+                                <p>{userData.cellphone}</p>
+                            </div>
+                            <div>
+                                <h4 className='font-semibold'>Nombre del proyecto: </h4>
+                                <p>{userData.nameProject}</p>
+                            </div>
+                            <div>
+                                <h4 className='font-semibold'>Tipo de proyecto: </h4>
+                                <p>{userData.typeProject}</p>
+                            </div>
+                        </CardBody>
+                    </Card>
+                </div>
+
+                <h2 className='font-bold text-2xl mt-8 cot-title'>Cotización</h2>
+
+                <div className='flex justify-between'>
                     <div className='my-5'>
                         <p className='font-semibold'>Tipo:</p>
                         <p>{materials.tipo}</p>

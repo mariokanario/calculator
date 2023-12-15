@@ -25,8 +25,29 @@
 
 
 .menu-result {
-    max-width: 600px!important;
+    max-width: 600px !important;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.cot-title, .result-info {
+    display: none;
+}
+
+/* PRINT */
+
+@media print {
+    .menu-result {
+        display: none;
+    }
+
+    .result-info {
+        display: grid;
+        justify-content: space-between;
+    }
+
+    .cot-title, .result-info {
+        display: block;
+    }
 }

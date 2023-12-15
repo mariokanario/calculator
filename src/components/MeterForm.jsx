@@ -65,33 +65,31 @@ const MeterForm = () => {
                         <form className="gap-4 grid grid-cols-1 md:grid-cols-2 mt-3"
                             onSubmit={formik1.handleSubmit}
                         >
-                            <div>
                                 <Input
                                     type="number"
+                                    min={0}
+                                    max={1000000}
                                     label="Largo"
                                     placeholder="35 m"
                                     id="largo"
                                     value={largo}
                                     onChange={formik1.handleChange}
+                                    errorMessage={formik1.errors.largo}
+                                    isInvalid={formik1.errors.largo && formik1.touched.largo}
                                 />
-                                {formik1.touched.largo && formik1.errors.largo && (
-                                    <small className="text-danger">{formik1.errors.largo}</small>
-                                )}
-                            </div>
 
-                            <div>
                                 <Input
                                     type="number"
+                                    min={0}
+                                    max={1000000}
                                     label="Ancho"
                                     placeholder="10 m"
                                     id="ancho"
                                     value={ancho}
                                     onChange={formik1.handleChange}
+                                    errorMessage={formik1.errors.ancho}
+                                    isInvalid={formik1.errors.ancho && formik1.touched.ancho}
                                 />
-                                {formik1.touched.ancho && formik1.errors.ancho && (
-                                    <small className="text-danger">{formik1.errors.ancho}</small>
-                                )}
-                            </div>
 
 
                             <h2 className='text-4xl font-bold col-span-1 md:col-span-2 mt-5'>Total: {meterCua} m²</h2>
@@ -113,18 +111,17 @@ const MeterForm = () => {
                             onSubmit={formik2.handleSubmit}>
                             <Input
                                 className='place-self-center w-full md:w-1/2'
+                                min={0}
+                                max={1000000}
                                 label="Total"
                                 placeholder="350 m"
                                 type="number"
                                 id="metros"
                                 value={metros}
                                 onChange={formik2.handleChange}
+                                errorMessage={formik2.errors.metros}
+                                isInvalid={formik2.errors.metros && formik2.touched.metros}
                             />
-
-                            
-                            {formik2.touched.metros && formik2.errors.metros && (
-                                <small className="text-danger">{formik2.errors.metros}</small>
-                            )}
 
                             <div className='flex justify-center gap-5 col-span-1 md:col-span-2'>
                                 <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
