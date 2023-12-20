@@ -68,8 +68,8 @@ const Home = () => {
     return (
         <div className='container mx-auto container-small'>
             <img className='mb-10 mx-auto' src="./img/logo.svg" alt="" style={{ width: "150px" }} />
-            {/* <h2 className='text-4xl font-bold text'>Bienvenido</h2> */}
-            <h3 className='text-lg text'>Bienvenido, para iniciar tu cotización llena el siguiente formulario</h3>
+            <h2 className='text-4xl font-bold text'>Bienvenido a la calculadora de construcción en seco</h2>
+            <h3 className='text-lg text'>para iniciar tu cotización llena el siguiente formulario</h3>
             <form onSubmit={formik.handleSubmit}>
                 <div className="gap-4 grid grid-cols-1 md:grid-cols-2 mt-6">
 
