@@ -89,13 +89,13 @@
             "material": "Perfil base 6 (6.35cm x 3.05m)",
             "medida": "ml",
             "valor": 2.3,
-            "equal": "Isover Arena 60 (rollos 12,4 m2)"
+            "equal": ["Isover Arena 60 (rollos 12,4 m2)"]
         },
         {
             "material": "Perfil base 9 (8.9 cm x 3.05m)",
             "medida": "ml",
             "valor": 2.3,
-            "equal": "Ecovent 80 (laminas 0,81m2)"
+            "equal": ["Ecovent 80 (laminas 0,81m2)"]
         }
     ]
 }

@@ -129,13 +129,13 @@
       "material": "Perfil base 6 (6.35cm x 3.05m)",
       "medida": "ml",
       "valor": 2.3,
-      "diferent": "Frescasa Eco 3,5 (rollos de 9 m2)"
+      "equal": ["Frescasa Eco 2,5 (rollos de 9 m2)", "Frescasa Eco 3,5 (rollos de 9 m2)"]
     },
     {
       "material": "Perfil base 9 (8.9 cm x 3.05m)",
       "medida": "ml",
       "valor": 2.3,
-      "equal": "Frescasa Eco 3,5 (rollos de 9 m2)"
+      "equal": ["Frescasa Eco 3,5 (rollos de 9 m2)"]
     },
     {
       "material": "Canal 26 (6.35cm x 3.05m)",

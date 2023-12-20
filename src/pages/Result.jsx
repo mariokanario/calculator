@@ -51,11 +51,6 @@ const Result = () => {
 
   const datosJson = data();
 
-  console.log(
-    "materiales",
-    materials?.values.find((e) => e.tipo == "aislante")
-  );
-
   return (
     <Transition>
       <div
@@ -138,7 +133,7 @@ const Result = () => {
                 <TableCell>
                   {Math.round(
                     datosJson[material.tipo][material.nombre].valor *
-                      materials.metrocuadrado
+                      materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) +1 : 1)
                   )}
                 </TableCell>
               </TableRow>
@@ -160,7 +155,7 @@ const Result = () => {
                     <TableCell>{complemento.material}</TableCell>
                     <TableCell>{complemento.medida}</TableCell>
                     <TableCell>
-                      {Math.round(complemento.valor * materials.metrocuadrado)}
+                      {Math.round(complemento.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) +1 : 1))}
                     </TableCell>
                   </TableRow>
                 ))
@@ -178,18 +173,31 @@ const Result = () => {
 
             {datosJson.metales != undefined
               ? datosJson.metales.map((metal, i) => {
-                  console.log(
-                    metal,
-                    materials?.values.find((e) => e.tipo == "aislante").nombre
-                  );
-                  if (metal?.equal || metal?.diferent) {
+
+                  if (metal?.equal?.length > 0) {
                     if (
-                      metal?.equal ==
-                        materials?.values.find((e) => e.tipo == "aislante")
-                          .nombre ||
-                      metal?.diferent !=
+                      metal?.equal?.length == 1 &&
+                      metal?.equal[0] ==
                         materials?.values.find((e) => e.tipo == "aislante")
                           .nombre
+                    ) {
+                      return (
+                        <TableRow key={i} className="text-left">
+                          <TableCell>{metal.material}</TableCell>
+                          <TableCell>{metal.medida}</TableCell>
+                          <TableCell>
+                            {Math.round(metal.valor * materials.metrocuadrado)}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    } else if (
+                      metal?.equal?.length == 2 &&
+                      (metal?.equal[0] ==
+                        materials?.values.find((e) => e.tipo == "aislante")
+                          .nombre ||
+                        metal?.equal[1] !=
+                          materials?.values.find((e) => e.tipo == "aislante")
+                            .nombre)
                     ) {
                       return (
                         <TableRow key={i} className="text-left">
