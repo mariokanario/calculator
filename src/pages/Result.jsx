@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Card, Button, CardBody } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Card, Button, CardBody, Tooltip } from "@nextui-org/react";
 import { FaFileDownload } from "react-icons/fa";
 import { MdAttachEmail } from "react-icons/md";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -10,11 +10,13 @@ import datosCielorasoCorridoExt from './../../json/cielorasoCorridoExt.json'
 import datosCielorasoReticular from './../../json/cielorasoReticular.json'
 import datosMuroInterior from './../../json/muroInterior.json'
 import datosMuroExterior from './../../json/muroExterior.json'
+import { useNavigate } from 'react-router-dom';
 
 const Result = () => {
 
-    const { materials, userData } = useProvider()
+    const navigate = useNavigate();
 
+    const { materials, userData } = useProvider()
 
     const data = () => {
         if (materials.tipo == "Cieloraso Corrido" && materials.subtipo == "interior") return datosCielorasoCorridoInt
@@ -38,7 +40,7 @@ const Result = () => {
 
                 <h2 className='text-2xl font-bold'>Resultado </h2>
 
-                <div className="result-info" style={{width: "100%"}}>
+                <div className="result-info" style={{ width: "100%" }}>
                     <Card className='col-span-1 md:col-span-3 '>
                         <CardBody className='gap-4 p-10 grid grid-cols-2 md:grid-cols-3'>
 
@@ -200,16 +202,31 @@ const Result = () => {
                     <li>Se considera 3% de desperdicio.</li>
                 </ul>
 
+                <Button
+                    className='my-5 bt-new'
+                    size="lg"
+                    color="primary"
+                    onPress={() => navigate("/")}
+                >
+                    Crear nueva cotización
+                </Button>
+
                 <Card className='fixed w-4/6  menu-result flex flex-row box-border p-5 justify-around'>
-                    <Button size="lg" className='text-xl' isIconOnly color="primary">
-                        <FaFileDownload />
-                    </Button>
-                    <Button size="lg" className='text-xl' isIconOnly color="primary">
-                        <MdAttachEmail />
-                    </Button>
-                    <Button size="lg" className='text-xl' isIconOnly color="primary">
-                        <IoLogoWhatsapp />
-                    </Button>
+                    <Tooltip content="Descargar" color="primary">
+                        <Button size="lg" className='text-xl' isIconOnly color="primary">
+                            <FaFileDownload />
+                        </Button>
+                    </Tooltip>
+                    <Tooltip content="Enviar a email" color="primary">
+                        <Button size="lg" className='text-xl' isIconOnly color="primary">
+                            <MdAttachEmail />
+                        </Button>
+                    </Tooltip>
+                    <Tooltip content="Contactar" color="primary">
+                        <Button size="lg" className='text-xl' isIconOnly color="primary">
+                            <IoLogoWhatsapp />
+                        </Button>
+                    </Tooltip>
                 </Card>
             </div>
         </Transition >

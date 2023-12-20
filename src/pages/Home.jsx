@@ -38,9 +38,7 @@ const Home = () => {
                 .min(5, "El teléfono debe de tener mínimo 5 letras")
                 .typeError("El teléfono es obligatorio"),
             nameProject: yup
-                .string()
-                .required("El nombre del proyecto es obligatorio")
-                .min(5, "El nombre debe tener mínimo 5 letras"),
+                .string(),
             typeProject: yup
                 .string()
                 .required("Elige un tipo de proyecto"),
@@ -131,7 +129,7 @@ const Home = () => {
 
                     <Input
                         type="cellphone"
-                        label="Celular de empresa"
+                        label="Celular"
                         placeholder=""
                         id="cellphone"
                         value={cellphone}
@@ -139,18 +137,6 @@ const Home = () => {
                         onBlur={formik.handleBlur}
                         errorMessage={formik.errors.cellphone}
                         isInvalid={formik.errors.cellphone && formik.touched.cellphone}
-                    />
-
-                    <Input
-                        type="text"
-                        label="Nombre del proyecto"
-                        placeholder=""
-                        id='nameProject'
-                        value={nameProject}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        errorMessage={formik.errors.nameProject}
-                        isInvalid={formik.errors.nameProject && formik.touched.nameProject}
                     />
 
                     <Select
@@ -172,12 +158,28 @@ const Home = () => {
                         <SelectItem key="Industrial" value="Industrial"> Industrial </SelectItem>
                     </Select>
 
+                    <Input
+                        type="text"
+                        label="Nombre del proyecto"
+                        placeholder=""
+                        id='nameProject'
+                        value={nameProject}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        errorMessage={formik.errors.nameProject}
+                        isInvalid={formik.errors.nameProject && formik.touched.nameProject}
+                    />
 
-                    <Checkbox onChange={() => setAgree(!agree)} >Aceptación de tratamientos de datos</Checkbox>
+
+                    <Checkbox className='col-span-1 md:col-span-2 text-center flex' onChange={() => setAgree(!agree)} >
+                        Aceptación de <a className='underline decoration-1' href='https://www.isover.com.co/sites/mac3.isover.com.co/files/2023-07/s15_pol_029_rh_politica_y_procedimiento_proteccion_datos_personales.pdf' target='_blanck'>
+                             tratamientos de datos
+                        </a>
+                    </Checkbox>
 
                 </div>
                 <Button
-                    
+
                     isDisabled={agree == false && true}
                     type='submit'
                     size="lg"

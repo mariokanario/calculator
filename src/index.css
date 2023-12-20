@@ -50,4 +50,8 @@
     .cot-title, .result-info {
         display: block;
     }
+
+    .bt-new{
+        display: none;
+    }
 }
