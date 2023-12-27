@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { useProvider } from './context/Provider';
@@ -9,6 +9,12 @@ const First = ({ item }) => {
     const navigate = useNavigate();
     const { setMaterials, materials } = useProvider()
     const { title, img, href } = item
+
+    useEffect(() => {
+        let item = materials
+        item.tipo = ""
+        setMaterials({ ...item })
+    }, [])
 
     return (
         <>

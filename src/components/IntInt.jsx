@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RadioGroup, Radio, Button, Slider } from "@nextui-org/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,10 @@ const IntInt = () => {
     const navigate = useNavigate();
     const { setMaterials, materials } = useProvider()
     const [level, setLevel] = useState("")
+    
+    useEffect(() => {
+        setMaterials({ ...materials, values: [] })
+    }, [])
 
     const Schema = yup
         .object({

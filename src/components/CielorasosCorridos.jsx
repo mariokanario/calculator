@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { RadioGroup, Radio, Button, Slider } from "@nextui-org/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,10 @@ import { useProvider } from './context/Provider';
 const CielorasosCorridos = () => {
 
     const {setMaterials, materials} = useProvider()
+    
+    useEffect(() => {
+        setMaterials({ ...materials, values: [] })
+    }, [])
 
     const navigate = useNavigate();
 
