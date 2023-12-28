@@ -38,7 +38,7 @@ const Breadcrumb = () => {
 
     return (
         <>
-            <Breadcrumbs variant='solid' className='flex justify-center my-5'>
+            <Breadcrumbs className='flex justify-start my-5'>
                 {
                     breadRout ?
                      breadRout.map((rou, i) => (

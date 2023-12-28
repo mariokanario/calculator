@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 function App() {
 
   useEffect(() => {
-    if (window.location.pathname != "/" && window.location.pathname != "/type") {
+    if (window.location.pathname != "/" ) {
       window.location.href = "/"
    }
   }, []);

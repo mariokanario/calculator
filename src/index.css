@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 
+.card {
+    padding: 2em;
+}
+
+.read-the-docs {
+    color: #888;
+}
+
 @media (min-width: 1000px) {
     .container-small {
         max-width: 600px;
@@ -24,16 +32,58 @@
 }
 
 
-.menu-result {
-    max-width: 600px !important;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
 .result-info {
     display: grid;
     justify-content: space-between;
 }
 
+.bg-right {
+    background-image: url(/img/bg-right.png);
+    background-position: top left;
+}
+
+.bg-left {
+    height: 100vh;
+    
+}
+
+.card-cont, .title-cont {
+    max-width: 640px;
+}
+
+.card-result {
+    max-width: 900px;
+}
+
+.title-cont {
+    position: fixed;
+}
+
+@media (max-width: 768px) {
+
+    .bg-left {
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .title-cont {
+        position: relative;
+    }
+}
+
+.cont-logo {
+    width: 200px;
+    background-color: white;
+    margin-left: 50px;
+    height: 92px;
+    padding: 15px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.title-f3 {
+    font-family: 'Caveat', sans-serif;
+    font-size: 30px;
+    line-height: 30px;
+}
