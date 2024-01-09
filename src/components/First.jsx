@@ -18,7 +18,11 @@ const First = ({ item }) => {
 
     return (
         <>
-            <Card shadow="sm" isPressable onPressEnd={() =>{
+            <Card 
+            shadow="sm" 
+            isPressable 
+            className='col-span-1 mt-5'
+            onPressEnd={() =>{
                 let item = materials
                 item.tipo =  title
                 setMaterials({ ...item })

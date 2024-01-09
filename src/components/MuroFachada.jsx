@@ -11,7 +11,7 @@ const MuroFachada = () => {
 
     const navigate = useNavigate();
     const { setMaterials, materials } = useProvider()
-    
+
     useEffect(() => {
         setMaterials({ ...materials, values: [] })
     }, [])
@@ -61,6 +61,7 @@ const MuroFachada = () => {
 
 
                     <RadioGroup
+                        size="lg"
                         id="cara1"
                         defaultValue={cara1}
                         onChange={({ target }) => {
@@ -77,13 +78,14 @@ const MuroFachada = () => {
                     </RadioGroup>
 
                     <RadioGroup
+                        size="lg"
                         id="cara2"
                         defaultValue={cara2}
                         onChange={({ target }) => {
                             formik.setFieldValue("cara2", target.value)
                             addElement("cara2", target.value)
                         }}
-                        >
+                    >
                         <h2 className='title-radio'>Cara 2</h2>
                         <Radio value="AquarocMax 11 mm">AquarocMax 11 mm</Radio>
                         <Radio value="X-terium 12.7 mm">X-terium 12.7 mm</Radio>
@@ -100,6 +102,7 @@ const MuroFachada = () => {
 
 
                     <RadioGroup
+                        size="lg"
                         id="desperdicio"
                         defaultValue={desperdicio}
                         onChange={({ target }) => {
@@ -120,13 +123,14 @@ const MuroFachada = () => {
                     </RadioGroup>
 
                     <RadioGroup
+                        size="lg"
                         id="aislante"
                         defaultValue={aislante}
                         onChange={({ target }) => {
                             formik.setFieldValue("aislante", target.value)
                             addElement("aislante", target.value)
                         }}
-                        >
+                    >
                         <h2 className='title-radio'>Aislante</h2>
                         <Radio value="Isover Arena 60 (rollos 12,4 m2)">Isover Arena 60 (rollos 12,4 m2)</Radio>
                         <Radio value="Ecovent 80 (laminas 0,81m2)">Ecovent 80 (laminas 0,81m2) </Radio>
@@ -147,7 +151,7 @@ const MuroFachada = () => {
                         size="lg"
                         color="primary"
                         type="submit"
-                        // onPress={() => navigate("/meter?type=muroFachada")}
+                    // onPress={() => navigate("/meter?type=muroFachada")}
                     >
                         Siguiente
                         <FaChevronRight />

@@ -10,7 +10,7 @@ import { useProvider } from './context/Provider';
 const CielorasosReticulares = () => {
 
     const { setMaterials, materials } = useProvider()
-    
+
     useEffect(() => {
         setMaterials({ ...materials, values: [] })
     }, [])
@@ -51,14 +51,16 @@ const CielorasosReticulares = () => {
         setMaterials({ ...materials, values: items })
     }
 
-   console.log(materials);
+    console.log(materials);
 
     return (
         <>
             <form onSubmit={formik.handleSubmit}>
                 <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 mt-5">
 
-                    <RadioGroup className='mb-8'
+                    <RadioGroup
+                        size="lg"
+                        className='mb-8'
                         id="placa"
                         defaultValue={placa}
                         onChange={({ target }) => {
@@ -79,7 +81,9 @@ const CielorasosReticulares = () => {
                         )}
                     </RadioGroup>
 
-                    <RadioGroup className='mb-8'
+                    <RadioGroup
+                        size="lg"
+                        className='mb-8'
                         id="suspencion"
                         defaultValue={suspencion}
                         onChange={({ target }) => {
@@ -101,6 +105,7 @@ const CielorasosReticulares = () => {
 
 
                     <RadioGroup
+                        size="lg"
                         id="desperdicio"
                         defaultValue={desperdicio}
                         onChange={({ target }) => {

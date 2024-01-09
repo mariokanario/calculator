@@ -71,7 +71,7 @@ const Type = () => {
       <section className='bg-left col-span-1 md:col-span-2 p-4 flex items-center justify-end'>
         <article className='title-cont text-left pr-8'>
           <h2 className=' text-1xl md:text-4xl font-bold uppercase'>Paso 1:</h2>
-          <h2 className=' text-1xl md:text-4xl font-normal uppercase'>Selecciona tu <br/> superficie</h2>
+          <h2 className=' text-1xl md:text-4xl font-normal uppercase'>Selecciona tu <br /> superficie</h2>
           <Breadcrumb />
         </article>
       </section>
@@ -82,7 +82,8 @@ const Type = () => {
           <img className='mb-10 mx-auto' src="./img/logo.svg" alt="" style={{ width: "150px" }} />
         </div>
         <Transition>
-          <Card className='card-cont p-10 ms-5'>
+          {/* <Card className='card-cont p-10 ms-5'> */}
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             {
 
               type == "inicio" ?
@@ -115,13 +116,14 @@ const Type = () => {
                     :
                     null
             }
-            <div className='flex justify-center gap-5'>
-              <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
-                <FaChevronLeft />
-                Anterior
-              </Button>
-            </div>
-          </Card>
+          </div>
+          <div className='flex justify-center gap-5'>
+            <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>
+              <FaChevronLeft />
+              Anterior
+            </Button>
+          </div>
+          {/*  </Card> */}
         </Transition>
       </section>
 

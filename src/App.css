@@ -84,3 +84,7 @@ main {
     animation: logo-spin infinite 20s linear;
   }
 }
+
+label {
+  text-align: left;
+}

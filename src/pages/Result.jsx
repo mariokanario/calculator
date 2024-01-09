@@ -79,13 +79,26 @@ const Result = () => {
 
   const downloadPDF = () => {
     const capture = document.querySelector("#print")
+
+    const margenSuperior = 60;
+    const margenInferior = 50;
+    const margenIzquierdo = 20;
+    const margenDerecho = 20;
+
     html2canvas(capture).then((canvas) => {
       const imgData = canvas.toDataURL('/img/png')
       const doc = new jsPDF('p', 'mm', 'a4')
       const componentWidth = doc.internal.pageSize.getWidth()
       const componentHeight = doc.internal.pageSize.getHeight()
-      doc.addImage(imgData, 'PNG', 0, 0, componentWidth, componentHeight)
-      doc.save('cotizacion.pdf')
+
+      doc.setDrawColor(255, 255, 255);
+      doc.rect(margenIzquierdo, margenSuperior, componentWidth - margenIzquierdo - margenDerecho, componentHeight - margenSuperior - margenInferior, 'F');
+
+      doc.addImage('/img/bg-pdf.jpg', 'JPEG', 0, 0, componentWidth, componentHeight);
+
+      doc.addImage(imgData, 'PNG', margenIzquierdo, margenSuperior, componentWidth - margenIzquierdo - margenDerecho, componentHeight - margenSuperior - margenInferior);
+      // doc.addImage(imgData, 'PNG', 0, 0, componentWidth, componentHeight)
+      doc.save('calculadora.pdf')
     })
   }
 
@@ -135,8 +148,8 @@ const Result = () => {
             <div
               className="container  container-medium relative"
             >
-              <div id='print'>
-                <h2 className="text-2xl font-bold">Cotización </h2>
+              <div id='print' className='p-5'>
+                <h2 className="text-2xl font-bold">Cálculo construcción en seco </h2>
 
                 <div className="result-info mt-5" style={{ width: "100%" }}>
                   <Card className="col-span-1 md:col-span-3 ">
@@ -470,7 +483,7 @@ const Result = () => {
                 color="primary"
                 onPress={() => navigate("/")}
               >
-                Crear nueva cotización
+                Crear nueva calculadora
               </Button>
 
 

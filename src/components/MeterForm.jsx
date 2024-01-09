@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Input, Tabs, Tab, CardBody, Card } from "@nextui-org/react";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ const MeterForm = () => {
     const navigate = useNavigate();
     const { materials, setMaterials } = useProvider()
 
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const Schema1 = yup
         .object({
@@ -63,33 +64,38 @@ const MeterForm = () => {
                 <Tabs aria-label="Options" color="primary" radius="full" className='justify-center mt-5'>
                     <Tab key="photos" title="Metros lineales">
                         <form className="gap-4 grid grid-cols-1 md:grid-cols-2 mt-3"
-                            onSubmit={formik1.handleSubmit}
+                            onSubmit={(e) => {
+                                setIsSubmitting(true)
+                                return formik1.handleSubmit(e)
+                            }}
                         >
-                                <Input
-                                    type="number"
-                                    min={0}
-                                    max={1000000}
-                                    label="Largo"
-                                    placeholder="35 m"
-                                    id="largo"
-                                    value={largo}
-                                    onChange={formik1.handleChange}
-                                    errorMessage={formik1.errors.largo}
-                                    isInvalid={formik1.errors.largo && formik1.touched.largo}
-                                />
+                            <Input
+                                size="lg"
+                                type="number"
+                                min={0}
+                                max={1000000}
+                                label="Largo"
+                                placeholder="35 m"
+                                id="largo"
+                                value={largo}
+                                onChange={formik1.handleChange}
+                                errorMessage={formik1.errors.largo && (formik1.touched.largo || isSubmitting) ? formik1.errors.largo : null}
+                                isInvalid={formik1.errors.largo && formik1.touched.largo}
+                            />
 
-                                <Input
-                                    type="number"
-                                    min={0}
-                                    max={1000000}
-                                    label="Ancho"
-                                    placeholder="10 m"
-                                    id="ancho"
-                                    value={ancho}
-                                    onChange={formik1.handleChange}
-                                    errorMessage={formik1.errors.ancho}
-                                    isInvalid={formik1.errors.ancho && formik1.touched.ancho}
-                                />
+                            <Input
+                                size="lg"
+                                type="number"
+                                min={0}
+                                max={1000000}
+                                label="Ancho"
+                                placeholder="10 m"
+                                id="ancho"
+                                value={ancho}
+                                onChange={formik1.handleChange}
+                                errorMessage={formik1.errors.ancho && (formik1.touched.ancho || isSubmitting) ? formik1.errors.ancho : null}
+                                isInvalid={formik1.errors.ancho && formik1.touched.ancho}
+                            />
 
 
                             <h2 className='text-4xl font-bold col-span-1 md:col-span-2 mt-5'>Total: {meterCua} m²</h2>
@@ -108,8 +114,13 @@ const MeterForm = () => {
                     </Tab>
                     <Tab key="music" title="Metros cuadrados">
                         <form className="flex w-full flex-col justify-center mt-3 place-items-center "
-                            onSubmit={formik2.handleSubmit}>
+                            onSubmit={(e) => {
+                                setIsSubmitting(true)
+                                return formik2.handleSubmit(e)
+                            }}
+                        >
                             <Input
+                                size="lg"
                                 className='place-self-center w-full md:w-1/2'
                                 min={0}
                                 max={1000000}
@@ -119,7 +130,7 @@ const MeterForm = () => {
                                 id="metros"
                                 value={metros}
                                 onChange={formik2.handleChange}
-                                errorMessage={formik2.errors.metros}
+                                errorMessage={formik2.errors.metros && (formik2.touched.metros || isSubmitting) ? formik2.errors.metros : null}
                                 isInvalid={formik2.errors.metros && formik2.touched.metros}
                             />
 

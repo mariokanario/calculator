@@ -20,8 +20,8 @@ export default {
         light: {
           colors: {
             primary: {
-              DEFAULT: "#f3c700",
-              foreground: "#000000",
+              DEFAULT: "#82ae00",
+              foreground: "#ffffff",
             },
             focus: "#BEF264",
           },

@@ -68,6 +68,7 @@ const CielorasosCorridos = () => {
             <form onSubmit={formik.handleSubmit}>
                 <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 mt-5">
                     <RadioGroup
+                        size="lg"
                         className='mb-8'
                         id="tipo"
                         defaultValue={tipo}
@@ -90,6 +91,7 @@ const CielorasosCorridos = () => {
 
 
                     <RadioGroup
+                        size="lg"
                         id="placa"
                         defaultValue={placa}
                         onChange={({ target }) => {
@@ -126,6 +128,7 @@ const CielorasosCorridos = () => {
 
 
                     <RadioGroup
+                        size="lg"
                         id="desperdicio"
                         defaultValue={desperdicio}
                         onChange={({ target }) => {
@@ -153,6 +156,7 @@ const CielorasosCorridos = () => {
 
 
                     <RadioGroup
+                        size="lg"
                         id="aislante"
                         defaultValue={aislante}
                         onChange={({ target }) => {
@@ -178,6 +182,7 @@ const CielorasosCorridos = () => {
 
 
                     <RadioGroup
+                        size="lg"
                         id="acabado"
                         defaultValue={acabado}
                         onChange={({ target }) => {

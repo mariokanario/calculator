@@ -13,6 +13,7 @@ const Home = () => {
     const { setUserData } = useProvider()
 
     const [agree, setAgree] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const Schema = yup
         .object({
@@ -72,8 +73,8 @@ const Home = () => {
 
                 <article className='title-cont text-left pr-8'>
                     <h2 className=' text-1xl md:text-4xl font-normal'>BIENVENIDO A LA <br/> <b>CALCULADORA</b> DE </h2>
-                    <h3 className=' text-1xl md:text-4xl font-bold' style={{ color: "#ffcf00", fontSize: "50px" }}>CONSTRUCCIÓN <br />EN SECO</h3>
-                    <p className='title-f3'>Para iniciar tu cotización,<br />
+                    <h3 className=' text-1xl md:text-4xl font-bold'>CONSTRUCCIÓN <br />EN SECO</h3>
+                    <p className='title-f3'>Para iniciar tu calculadora,<br />
                         llena el siguiente formulario</p>
                 </article>
 
@@ -85,11 +86,15 @@ const Home = () => {
                     <img className='pb-0 mx-auto' src="./img/logo.svg" alt="" style={{ width: "150px" }} />
                 </div>
                 <Card className='card-cont p-10 ms-5'>
-                    <form onSubmit={formik.handleSubmit}>
+                    <form onSubmit={(e) => {
+                        setIsSubmitting(true)
+                        return formik.handleSubmit(e)
+                    }}>
                         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 mt-6">
 
 
                             <Input
+                                size="lg"
                                 className='col-span-1 md:col-span-2'
                                 type="text"
                                 label="Nombre"
@@ -98,18 +103,19 @@ const Home = () => {
                                 value={name}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.name}
+                                errorMessage={formik.errors.name && (formik.touched.name || isSubmitting) ? formik.errors.name : null}
                                 isInvalid={formik.errors.name && formik.touched.name}
                             />
 
                             <Select
+                                size="lg"
                                 label="Tipo de documento"
                                 id="typeDocument"
                                 name="typeDocument"
                                 value={typeDocument}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.typeDocument}
+                                errorMessage={formik.errors.typeDocument && (formik.touched.typeDocument || isSubmitting) ? formik.errors.typeDocument : null}
                                 isInvalid={formik.errors.typeDocument && formik.touched.typeDocument}
                             >
                                 <SelectItem key="CC" value="CC"> CC </SelectItem>
@@ -119,6 +125,7 @@ const Home = () => {
                             </Select>
 
                             <Input
+                                size="lg"
                                 type="text"
                                 label="Número de documento"
                                 placeholder=""
@@ -126,11 +133,12 @@ const Home = () => {
                                 value={document}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.document}
+                                errorMessage={formik.errors.document && (formik.touched.document || isSubmitting) ? formik.errors.document : null}
                                 isInvalid={formik.errors.document && formik.touched.document}
                             />
 
                             <Input
+                                size="lg"
                                 type="email"
                                 label="Correo electrónico"
                                 placeholder=""
@@ -138,11 +146,12 @@ const Home = () => {
                                 value={email}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.email}
+                                errorMessage={formik.errors.email && (formik.touched.email || isSubmitting) ? formik.errors.email : null}
                                 isInvalid={formik.errors.email && formik.touched.email}
                             />
 
                             <Input
+                                size="lg"
                                 type="cellphone"
                                 label="Celular"
                                 placeholder=""
@@ -150,18 +159,19 @@ const Home = () => {
                                 value={cellphone}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.cellphone}
+                                errorMessage={formik.errors.cellphone && (formik.touched.cellphone || isSubmitting) ? formik.errors.cellphone : null}
                                 isInvalid={formik.errors.cellphone && formik.touched.cellphone}
                             />
 
                             <Select
+                                size="lg"
                                 label="Tipo de proyecto"
                                 id="typeProject"
                                 name="typeProject"
                                 value={typeProject}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.typeProject}
+                                errorMessage={formik.errors.typeProject && (formik.touched.typeProject || isSubmitting) ? formik.errors.typeProject : null}
                                 isInvalid={formik.errors.typeProject && formik.touched.typeProject}
                             >
                                 <SelectItem key="Salud" value="Salud"> Salud </SelectItem>
@@ -174,6 +184,7 @@ const Home = () => {
                             </Select>
 
                             <Input
+                                size="lg"
                                 type="text"
                                 label="Nombre del proyecto"
                                 placeholder=""
@@ -181,7 +192,7 @@ const Home = () => {
                                 value={nameProject}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.nameProject}
+                                errorMessage={formik.errors.nameProject && (formik.touched.nameProject || isSubmitting) ? formik.errors.nameProject : null}
                                 isInvalid={formik.errors.nameProject && formik.touched.nameProject}
                             />
 

@@ -12,7 +12,7 @@ const IntInt = () => {
     const navigate = useNavigate();
     const { setMaterials, materials } = useProvider()
     const [level, setLevel] = useState("")
-    
+
     useEffect(() => {
         setMaterials({ ...materials, values: [] })
     }, [])
@@ -64,6 +64,7 @@ const IntInt = () => {
                 <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 mt-5">
 
                     <RadioGroup
+                        size="lg"
                         id="cara1"
                         defaultValue={cara1}
                         onChange={({ target }) => {
@@ -85,6 +86,7 @@ const IntInt = () => {
                     </RadioGroup>
 
                     <RadioGroup
+                        size="lg"
                         id="cara2"
                         defaultValue={cara2}
                         onChange={({ target }) => {
@@ -107,6 +109,7 @@ const IntInt = () => {
 
 
                     <RadioGroup
+                        size="lg"
                         id="desperdicio"
                         defaultValue={desperdicio}
                         onChange={({ target }) => {
@@ -127,6 +130,7 @@ const IntInt = () => {
                     </RadioGroup>
 
                     <RadioGroup
+                        size="lg"
                         id="aislante"
                         defaultValue={aislante}
                         onChange={({ target }) => {
@@ -148,6 +152,7 @@ const IntInt = () => {
                     </RadioGroup>
 
                     <RadioGroup
+                        size="lg"
                         id="acabado"
                         defaultValue={acabado}
                         onChange={({ target }) => {
