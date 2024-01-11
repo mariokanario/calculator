@@ -104,20 +104,20 @@ const CielorasosCorridos = () => {
                         {
                             option == "interior" &&
                             <>
-                                <Radio value="Light 12.7 mm">Light 12.7 mm</Radio>
-                                <Radio value="RH 12.7 mm">RH 12.7 mm</Radio>
-                                <Radio value="RH 15.9 mm">RH 15.9 mm</Radio>
-                                <Radio value="RF 12.7 mm">RF 12.7 mm</Radio>
-                                <Radio value="RF 15.9 mm">RF 15.9 mm</Radio>
-                                <Radio value="Anti Moho 12.7 mm">Anti Moho 12.7 mm</Radio>
-                                <Radio value="Acustik 12 mm">Acustik 12 mm</Radio>
+                                <Radio value="Placa Light 12.7 mm">Placa Light 12.7 mm</Radio>
+                                <Radio value="Placa RH 12.7 mm">Placa RH 12.7 mm</Radio>
+                                <Radio value="Placa RH 15.9 mm">Placa RH 15.9 mm</Radio>
+                                <Radio value="Placa RF 12.7 mm">Placa RF 12.7 mm</Radio>
+                                <Radio value="Placa RF 15.9 mm">Placa RF 15.9 mm</Radio>
+                                <Radio value="Placa Anti Moho 12.7 mm">Placa Anti Moho 12.7 mm</Radio>
+                                <Radio value="Placa Acustik 12 mm">Placa Acustik 12 mm</Radio>
                             </>
                         }
                         {
                             option == "exterior" &&
                             <>
-                                <Radio value="AquarocMax 11 mm">AquarocMax 11 mm</Radio>
-                                <Radio value="X-terium 12.7 mm">X-terium 12.7 mm</Radio>
+                                <Radio value="Placa AquarocMax 11 mm">Placa AquarocMax 11 mm</Radio>
+                                <Radio value="Placa X-terium 12.7 mm">Placa X-terium 12.7 mm</Radio>
                             </>
                         }
                         {formik.touched.placa && formik.errors.placa && (

@@ -70,7 +70,7 @@ const Result = () => {
 
   useEffect(() => {
     const datosJson = data();
-    if (datosJson ) {
+    if (datosJson) {
       const priceInfoOne = materials?.values?.map((material) => ({
         nombre: material.nombre,
         medida: datosJson[material.tipo][material.nombre].medida,
@@ -79,20 +79,20 @@ const Result = () => {
           materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)
         ),
         precio: 0,
-        subTotal: 0,
+        subtotal: 0,
       }))
       setMateriales(priceInfoOne)
+
 
       const priceInfoTwo = datosJson?.complementos?.map((complemento) => ({
         nombre: complemento.material,
         medida: complemento.medida,
         cantidad: Math.round(complemento.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)),
         precio: 0,
-        subTotal: 0,
+        subtotal: 0,
       }))
       setComplementos(priceInfoTwo)
 
-console.log(datosJson);
       if (materials?.metales) {
         const priceInfoThree = datosJson?.metales?.map((metal) => {
           if (metal?.equal?.length > 0) {
@@ -107,7 +107,7 @@ console.log(datosJson);
                 medida: metal.medida,
                 cantidad: Math.round(metal.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)),
                 precio: 0,
-                subTotal: 0,
+                subtotal: 0,
               }
             } else if (
               metal?.equal?.length == 2 &&
@@ -123,7 +123,7 @@ console.log(datosJson);
                 medida: metal.medida,
                 cantidad: Math.round(metal.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)),
                 precio: 0,
-                subTotal: 0,
+                subtotal: 0,
               }
             }
           } else {
@@ -132,7 +132,7 @@ console.log(datosJson);
               medida: metal.medida,
               cantidad: Math.round(metal.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)),
               precio: 0,
-              subTotal: 0,
+              subtotal: 0,
             }
           }
           return null
@@ -141,18 +141,18 @@ console.log(datosJson);
         setMetales(priceInfoThree)
 
       }
-      
     }
-    
 
   }, [materials])
 
   useEffect(() => {
-    if (!valPrices) return
-    let tempTotalPrice = Object.values(valPrices).reduce((acumulador, valorActual) => acumulador + valorActual, 0);
-    setTotalPrice(tempTotalPrice)
 
-  }, [valPrices])
+    let tempTotalPriceMat = materiales ? materiales?.map(e => e.subtotal).reduce((acumulador, valorActual) => acumulador + valorActual, 0) : 0
+    let tempTotalPriceCom = complementos ? complementos?.map(e => e.subtotal).reduce((acumulador, valorActual) => acumulador + valorActual, 0) : 0
+    let tempTotalPriceMet = metales ?  metales?.map(e => e.subtotal).reduce((acumulador, valorActual) => acumulador + valorActual, 0) : 0
+    setTotalPrice(tempTotalPriceMat + tempTotalPriceCom + tempTotalPriceMet)
+
+  }, [materiales, complementos, metales])
 
   const manejarCambio = (nombre, valor, grupo) => {
     if (grupo === 1) {
@@ -197,7 +197,6 @@ console.log(datosJson);
   };
 
 
-
   /* PRINT */
 
   const downloadPDF = () => {
@@ -225,7 +224,6 @@ console.log(datosJson);
     })
   }
 
-  console.log(valPrices);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
