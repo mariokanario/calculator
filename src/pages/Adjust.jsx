@@ -17,7 +17,7 @@ const Adjust = () => {
     const type = queryParams.get("type");
 
     return (
-        <main class="grid grid-cols-1 md:grid-cols-5 min-h-screen">
+        <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
 
             <section className='bg-left col-span-1 md:col-span-2 p-4 flex items-center justify-end'>
                 <article className='title-cont text-left pr-8'>

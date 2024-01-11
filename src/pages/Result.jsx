@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -26,25 +26,126 @@ import datosMuroExterior from "./../../json/muroExterior.json";
 import { useNavigate } from "react-router-dom";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import IntlCurrencyInput from "react-intl-currency-input"
+import { NumericFormat } from 'react-number-format';
+
 
 const Result = () => {
   const navigate = useNavigate();
+
+  const f = new Intl.NumberFormat(undefined, {
+    currency: "COP",
+    style: "currency",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  })
+
+  const currencyConfig = {
+    locale: "es-ES",
+    formats: {
+      number: {
+        COP: {
+          currency: "COP",
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        },
+      },
+    },
+  };
+
+  /*  const handleChange = (e) => {
+     
+   } */
 
   const { materials, userData } = useProvider();
 
   const [price, setPrice] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
-
+  const [totalData, setTotalData] = useState([])
   const [valPrices, setValPrices] = useState({});
+  const [complementos, setComplementos] = useState()
+  const [materiales, setMateriales] = useState()
+  const [metales, setMetales] = useState()
 
-  const manejarCambio = (nombre, valor) => {
-    setValPrices((prevValores) => ({
-      ...prevValores,
-      [nombre]: Number(valor),
-    }));
-  };
 
-  console.log(valPrices);
+  useEffect(() => {
+    const datosJson = data();
+    if (datosJson ) {
+      const priceInfoOne = materials?.values?.map((material) => ({
+        nombre: material.nombre,
+        medida: datosJson[material.tipo][material.nombre].medida,
+        cantidad: Math.round(
+          datosJson[material.tipo][material.nombre].valor *
+          materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)
+        ),
+        precio: 0,
+        subTotal: 0,
+      }))
+      setMateriales(priceInfoOne)
+
+      const priceInfoTwo = datosJson?.complementos?.map((complemento) => ({
+        nombre: complemento.material,
+        medida: complemento.medida,
+        cantidad: Math.round(complemento.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)),
+        precio: 0,
+        subTotal: 0,
+      }))
+      setComplementos(priceInfoTwo)
+
+console.log(datosJson);
+      if (materials?.metales) {
+        const priceInfoThree = datosJson?.metales?.map((metal) => {
+          if (metal?.equal?.length > 0) {
+            if (
+              metal?.equal?.length == 1 &&
+              metal?.equal[0] ==
+              materials?.values.find((e) => e.tipo == "aislante")
+                .nombre
+            ) {
+              return {
+                nombre: metal.material,
+                medida: metal.medida,
+                cantidad: Math.round(metal.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)),
+                precio: 0,
+                subTotal: 0,
+              }
+            } else if (
+              metal?.equal?.length == 2 &&
+              (metal?.equal[0] ==
+                materials?.values.find((e) => e.tipo == "aislante")
+                  .nombre ||
+                metal?.equal[1] !=
+                materials?.values.find((e) => e.tipo == "aislante")
+                  .nombre)
+            ) {
+              return {
+                nombre: metal.material,
+                medida: metal.medida,
+                cantidad: Math.round(metal.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)),
+                precio: 0,
+                subTotal: 0,
+              }
+            }
+          } else {
+            return {
+              nombre: metal.material,
+              medida: metal.medida,
+              cantidad: Math.round(metal.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)),
+              precio: 0,
+              subTotal: 0,
+            }
+          }
+          return null
+        }).filter(e => e)
+
+        setMetales(priceInfoThree)
+
+      }
+      
+    }
+    
+
+  }, [materials])
 
   useEffect(() => {
     if (!valPrices) return
@@ -52,6 +153,28 @@ const Result = () => {
     setTotalPrice(tempTotalPrice)
 
   }, [valPrices])
+
+  const manejarCambio = (nombre, valor, grupo) => {
+    if (grupo === 1) {
+      const data = materiales
+      const index = data.findIndex(e => e.nombre == nombre)
+      data[index].precio = valor
+      data[index].subtotal = valor * data[index].cantidad
+      setMateriales([...data])
+    } else if (grupo === 2) {
+      const data = complementos
+      const index = data.findIndex(e => e.nombre == nombre)
+      data[index].precio = valor
+      data[index].subtotal = valor * data[index].cantidad
+      setComplementos([...data])
+    } else if (grupo === 3) {
+      const data = metales
+      const index = data.findIndex(e => e.nombre == nombre)
+      data[index].precio = valor
+      data[index].subtotal = valor * data[index].cantidad
+      setMetales([...data])
+    }
+  };
 
   const data = () => {
     if (
@@ -68,12 +191,12 @@ const Result = () => {
 
     if (materials.tipo == "Cieloraso Reticular") return datosCielorasoReticular;
 
-    if (materials.tipo == "Muro Interior - Interior") return datosMuroInterior;
+    if (materials.tipo == "Muro Interior") return datosMuroInterior;
 
     if (materials.tipo == "Muro Facahada") return datosMuroExterior;
   };
 
-  const datosJson = data();
+
 
   /* PRINT */
 
@@ -102,10 +225,10 @@ const Result = () => {
     })
   }
 
-
+  console.log(valPrices);
 
   return (
-    <main class="grid grid-cols-1 md:grid-cols-5 min-h-screen">
+    <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
 
       <section className='bg-left col-span-1 md:col-span-1 p-4 flex items-center justify-end'>
 
@@ -116,7 +239,6 @@ const Result = () => {
           <div className="cont-logo pb-0">
             <img className='pb-0 mx-auto' src="./img/logo.svg" alt="" style={{ width: "150px" }} />
           </div>
-
           <Card className="menu-result flex flex-row box-border p-5 justify-around gap-5 rounded-none rounded-t-lg mr-5">
             <Tooltip content="Descargar" color="primary">
               <Button size="lg" className='text-xl' isIconOnly color="primary"
@@ -140,8 +262,6 @@ const Result = () => {
             </Tooltip>
           </Card>
         </div>
-
-
 
         <Transition>
           <Card className='card-result p-10 ms-5'>
@@ -221,36 +341,29 @@ const Result = () => {
                   </TableHeader>
 
                   <TableBody>
-                    {materials?.values?.map((material, i) => (
+                    {materiales?.map((material, i) => (
                       <TableRow key={i} className="text-left">
                         <TableCell>{material.nombre}</TableCell>
                         <TableCell>
-                          {datosJson[material.tipo][material.nombre].medida}
+                          {material.medida}
                         </TableCell>
                         <TableCell>
-                          {Math.round(
-                            datosJson[material.tipo][material.nombre].valor *
-                            materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)
-                          )}
+                          {material.cantidad}
                         </TableCell>
                         {
                           price ?
                             <TableCell>
-                              <Input
-                                type="number"
-                                placeholder="0 $"
-                                min={0}
-                                max={1000000}
-                                onChange={(e) => manejarCambio('inputOne' + i, (
-                                  e.target.value
-                                  *
-                                  Math.round(
-                                    datosJson[material.tipo][material.nombre].valor *
-                                    materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1)
-                                  )
-                                )
-                                )}
+
+                              <NumericFormat
+                                prefix="$ "
+                                thousandSeparator="."
+                                decimalSeparator=","
+                                customInput={Input}
+                                defaultValue={0}
+                                onValueChange={(e) => manejarCambio(material.nombre, e.floatValue, 1)}
                               />
+
+
                             </TableCell>
                             :
                             <TableCell></TableCell>
@@ -258,7 +371,7 @@ const Result = () => {
                       </TableRow>
                     ))}
 
-                    {datosJson.complementos != undefined ? (
+                    {complementos && complementos?.length > 0 ? (
                       <TableRow key={100} className="text-left">
                         <TableCell>
                           <h2 className="font-semibold text-base">Complementos</h2>
@@ -269,29 +382,24 @@ const Result = () => {
                       </TableRow>
                     ) : null}
 
-                    {datosJson.complementos != undefined
-                      ? datosJson.complementos.map((complemento, i) => (
+                    {complementos && complementos?.length > 0
+                      ? complementos.map((complemento, i) => (
                         <TableRow key={i + 10} className="text-left">
-                          <TableCell>{complemento.material}</TableCell>
+                          <TableCell>{complemento.nombre}</TableCell>
                           <TableCell>{complemento.medida}</TableCell>
-                          <TableCell>
-                            {Math.round(complemento.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1))}
-                          </TableCell>
+                          <TableCell>{complemento.cantidad}</TableCell>
                           {
                             price ?
                               <TableCell>
-                                <Input
-                                  type="number"
-                                  placeholder="0 $"
-                                  min={0}
-                                  max={1000000}
-                                  onChange={(e) => manejarCambio('inputTwo' + i, (
-                                    e.target.value
-                                    *
-                                    Math.round(complemento.valor * materials.metrocuadrado * (materials.desperdicio > 0 ? (parseInt(materials.desperdicio) / 100) + 1 : 1))
-                                  )
-                                  )}
+                                <NumericFormat
+                                  prefix="$ "
+                                  thousandSeparator="."
+                                  decimalSeparator=","
+                                  customInput={Input}
+                                  defaultValue={0}
+                                  onValueChange={(e) => manejarCambio(complemento.nombre, e.floatValue, 2)}
                                 />
+
                               </TableCell>
                               :
                               <TableCell></TableCell>
@@ -301,7 +409,7 @@ const Result = () => {
                       ))
                       : null}
 
-                    {datosJson.metales != undefined ? (
+                    {metales != undefined ? (
                       <TableRow key={101} className="text-left">
                         <TableCell>
                           <h2 className="font-semibold text-base">Metales</h2>
@@ -312,115 +420,33 @@ const Result = () => {
                       </TableRow>
                     ) : null}
 
-                    {datosJson.metales != undefined
-                      ? datosJson.metales.map((metal, i) => {
+                    {metales != undefined
+                      ? metales.map((metal, i) => {
 
-                        if (metal?.equal?.length > 0) {
-                          if (
-                            metal?.equal?.length == 1 &&
-                            metal?.equal[0] ==
-                            materials?.values.find((e) => e.tipo == "aislante")
-                              .nombre
-                          ) {
-                            return (
-                              <TableRow key={i + 20} className="text-left">
-                                <TableCell>{metal.material}</TableCell>
-                                <TableCell>{metal.medida}</TableCell>
+                        return (
+                          <TableRow key={i + 20} className="text-left">
+                            <TableCell>{metal.material}</TableCell>
+                            <TableCell>{metal.medida}</TableCell>
+                            <TableCell>{metal.valor}</TableCell>
+                            {
+                              price ?
                                 <TableCell>
-                                  {Math.round(metal.valor * materials.metrocuadrado)}
+                                  <NumericFormat
+                                    prefix="$ "
+                                    thousandSeparator="."
+                                    decimalSeparator=","
+                                    customInput={Input}
+                                    defaultValue={0}
+                                    onValueChange={(e) => manejarCambio(complemento.nombre, e.floatValue, 3)}
+                                  />
+
                                 </TableCell>
-                                {
-                                  price ?
-                                    <TableCell>
-                                      <Input
-                                        type="number"
-                                        placeholder="0 $"
-                                        min={0}
-                                        max={1000000}
-                                        onChange={(e) => manejarCambio('inputThree' + i, (
-                                          e.target.value
-                                          *
-                                          Math.round(metal.valor * materials.metrocuadrado)
-                                        )
-                                        )}
-                                      />
-                                    </TableCell>
-                                    :
-                                    <TableCell></TableCell>
-                                }
+                                :
+                                <TableCell></TableCell>
+                            }
 
-                              </TableRow>
-                            );
-                          } else if (
-                            metal?.equal?.length == 2 &&
-                            (metal?.equal[0] ==
-                              materials?.values.find((e) => e.tipo == "aislante")
-                                .nombre ||
-                              metal?.equal[1] !=
-                              materials?.values.find((e) => e.tipo == "aislante")
-                                .nombre)
-                          ) {
-                            return (
-                              <TableRow key={i + 20} className="text-left">
-                                <TableCell>{metal.material}</TableCell>
-                                <TableCell>{metal.medida}</TableCell>
-                                <TableCell>
-                                  {Math.round(metal.valor * materials.metrocuadrado)}
-                                </TableCell>
-                                {
-                                  price ?
-                                    <TableCell>
-                                      <Input
-                                        type="number"
-                                        min={0}
-                                        max={1000000}
-                                        placeholder="0 $"
-                                        onChange={(e) => manejarCambio('inputFour' + i, (
-                                          e.target.value
-                                          *
-                                          Math.round(metal.valor * materials.metrocuadrado)
-                                        )
-                                        )}
-                                      />
-                                    </TableCell>
-                                    :
-                                    <TableCell></TableCell>
-                                }
-
-                              </TableRow>
-                            );
-                          }
-                        } else {
-                          return (
-                            <TableRow key={i + 20} className="text-left">
-                              <TableCell>{metal.material}</TableCell>
-                              <TableCell>{metal.medida}</TableCell>
-                              <TableCell>
-                                {Math.round(metal.valor * materials.metrocuadrado)}
-                              </TableCell>
-                              {
-                                price ?
-                                  <TableCell>
-                                    <Input
-                                      type="number"
-                                      placeholder="0 $"
-                                      min={0}
-                                      max={1000000}
-                                      onChange={(e) => manejarCambio('inputFive' + i, (
-                                        e.target.value
-                                        *
-                                        Math.round(metal.valor * materials.metrocuadrado)
-                                      )
-                                      )}
-                                    />
-                                  </TableCell>
-                                  :
-                                  <TableCell></TableCell>
-                              }
-
-                            </TableRow>
-                          );
-                        }
+                          </TableRow>
+                        );
                       })
                       : null}
 
@@ -433,9 +459,9 @@ const Result = () => {
                           <TableCell></TableCell>
                           <TableCell></TableCell>
                           <TableCell>
-                            <h2 className="font-semibold text-base">
+                            <h2 className="font-semibold text-base ">
                               {
-                                totalPrice + " $"
+                                f.format(totalPrice)
                               }
                             </h2>
                           </TableCell>

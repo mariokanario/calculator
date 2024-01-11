@@ -67,14 +67,14 @@ const Home = () => {
     const { name, typeDocument, document, email, cellphone, nameProject, typeProject } = formik.values;
 
     return (
-        <main class="grid grid-cols-1 md:grid-cols-5 min-h-screen">
+        <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
 
             <section className='bg-left col-span-1 md:col-span-2 p-4 flex items-center justify-end'>
 
                 <article className='title-cont text-left pr-8'>
-                    <h2 className=' text-1xl md:text-4xl font-normal'>BIENVENIDO A LA <br/> <b>CALCULADORA</b> DE </h2>
-                    <h3 className=' text-1xl md:text-4xl font-bold'>CONSTRUCCIÓN <br />EN SECO</h3>
-                    <p className='title-f3'>Para iniciar tu calculadora,<br />
+                    <h2 className=' text-2xl md:text-4xl font-normal'>BIENVENIDO A LA <br className='hidden md:block' /> <b>CALCULADORA</b> DE </h2>
+                    <h3 className=' text-1xl md:text-4xl font-bold my-2'>CONSTRUCCIÓN <br className='hidden md:block' />EN SECO</h3>
+                    <p className='title-f3'>Para iniciar tu calculadora, <br className='hidden md:block' />
                         llena el siguiente formulario</p>
                 </article>
 
@@ -115,8 +115,8 @@ const Home = () => {
                                 value={typeDocument}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.typeDocument && (formik.touched.typeDocument || isSubmitting) ? formik.errors.typeDocument : null}
-                                isInvalid={formik.errors.typeDocument && formik.touched.typeDocument}
+                                errorMessage={formik.errors.typeDocument && ( isSubmitting) ? formik.errors.typeDocument : null}
+                                isInvalid={formik.errors.typeDocument }
                             >
                                 <SelectItem key="CC" value="CC"> CC </SelectItem>
                                 <SelectItem key="CE" value="CE"> CE </SelectItem>
@@ -171,8 +171,8 @@ const Home = () => {
                                 value={typeProject}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMessage={formik.errors.typeProject && (formik.touched.typeProject || isSubmitting) ? formik.errors.typeProject : null}
-                                isInvalid={formik.errors.typeProject && formik.touched.typeProject}
+                                errorMessage={formik.errors.typeProject && ( isSubmitting) ? formik.errors.typeProject : null}
+                                isInvalid={formik.errors.typeProject }
                             >
                                 <SelectItem key="Salud" value="Salud"> Salud </SelectItem>
                                 <SelectItem key="Educación" value="Educación"> Educación </SelectItem>

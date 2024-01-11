@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'Gotham';
-  src: url('./fonts/Gotham-Medium.otf') format('otf');
+  src: url('/fonts/Gotham-Medium.otf') format('otf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gotham';
-  src: url('./fonts/Gotham-Bold.otf') format('otf');
+  src: url('/fonts/Gotham-Bold.otf') format('otf');
   /* Ruta y formato de la fuente bold */
   font-weight: bold;
   font-style: normal;
@@ -15,7 +15,7 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('./fonts/Gotham-MediumItalic.otf') format('otf');
+  src: url('/fonts/Gotham-MediumItalic.otf') format('otf');
   /* Ruta y formato de la fuente italic */
   font-weight: normal;
   font-style: italic;
@@ -23,7 +23,7 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('./fonts/Gotham-BoldItalic.otf') format('otf');
+  src: url('/fonts/Gotham-BoldItalic.otf') format('otf');
   /* Ruta y formato de la fuente bold e italic */
   font-weight: bold;
   font-style: italic;
@@ -31,7 +31,7 @@
 
 @font-face {
   font-family: 'Caveat';
-  src: url('./fonts/Caveat-VariableFont_wght.ttf') format('truetype');
+  src: url('/fonts/Caveat-VariableFont_wght.ttf') format('truetype');
 }
 
 

@@ -39,7 +39,7 @@ const Type = () => {
 
   const listMuros = [
     {
-      title: "Muro Interior - Interior",
+      title: "Muro Interior",
       img: "/img/int_int.jpg",
       href: "/adjust?type=intInt",
     },
@@ -65,7 +65,7 @@ const Type = () => {
 
   return (
 
-    <main class="grid grid-cols-1 md:grid-cols-5 min-h-screen">
+    <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
 
 
       <section className='bg-left col-span-1 md:col-span-2 p-4 flex items-center justify-end'>
@@ -78,9 +78,9 @@ const Type = () => {
 
       <section className="bg-right col-span-1 md:col-span-3 p-4  flex flex-col justify-center">
 
-        <div className="cont-logo">
+        {/* <div className="cont-logo">
           <img className='mb-10 mx-auto' src="./img/logo.svg" alt="" style={{ width: "150px" }} />
-        </div>
+        </div> */}
         <Transition>
           {/* <Card className='card-cont p-10 ms-5'> */}
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
