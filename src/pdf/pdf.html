@@ -8,64 +8,64 @@
 <body>
 
     <div style="width: 800px; margin: 0; padding: 0; font-family: Arial;">
-        <header style="display: flex;">
+        <div>
             <img src="/public/img/pdf-header.jpg" style="width: 100%;margin: 0; padding: 0" alt="">
-        </header>
-        <section
-        style="background-image: url(/public/img/pdf-body.jpg); background-size: 100%; display: flex;"
+        </div>
+        <div
+        style="background-image: url(/public/img/pdf-body.jpg); background-size: 100%; margin-top: -4px;"
         >
 
-        <div style="width: 80%; margin: 0 auto; background-color: white; padding: 15px; border-radius: 20px;">
-            <h2>Cálculo construcción en seco</h2>
-            <div style="display: grid; grid-template-rows: repeat(2, 1fr); grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0;">
-                <div>
-                    <h4>Cliente</h4>
-                    <p>Mario</p>
-                </div>
-                <div>
-                    <h4>Documento</h4>
-                    <p>Mario</p>
-                </div>
-                <div>
-                    <h4>Email</h4>
-                    <p>Mario</p>
-                </div>
-                <div>
-                    <h4>Celular</h4>
-                    <p>Mario</p>
-                </div>
-                <div>
-                    <h4>Nombre del proyecto</h4>
-                    <p>Mario</p>
-                </div>
-                <div>
-                    <h4>Tipo de proyecto</h4>
-                    <p>Mario</p>
-                </div>
-            </div>
-            <hr>
-            <div
-                style="display: grid; grid-template-rows: repeat(1, 1fr); grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0;">
-                <div>
-                    <h4>Tipo</h4>
-                    <p>Mario</p>
-                </div>
-                <div>
-                    <h4>Desperdicio</h4>
-                    <p>Mario</p>
-                </div>
-                <div>
-                    <h4>Metros cuadrados</h4>
-                    <p>Mario</p>
-                </div>
-            </div>
-            <hr>
-            <table style="border-collapse: collapse; width: 100%; text-align: left;">
+        <div style="width: 80%; margin: 0 auto; padding: 15px; border-radius: 20px;">
+            <h1>Cálculo construcción en seco</h1>
+
+            <table style="width: 100%; text-align: left; margin-top: 10px;">
+                <tr>
+                    <th style="width: 33%;">Cliente</th>
+                    <th style="width: 33%;">Documento</th>
+                    <th style="width: 33%;">Email</th>
+                </tr>
+                <tr>
+                    <td>NomCliente</td>
+                    <td>123</td>
+                    <td>NomCliente</td>
+                </tr>
+
+                <tr>
+                    <th>Celular</th>
+                    <th>Nombre del proyecto</th>
+                    <th>Tipo de proyecto</th>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td>NomCliente</td>
+                    <td>NomCliente</td>
+                </tr>
+
+            </table>
+
+            <hr style="border: 0; background-color: black; height: 1px;">
+
+            <table style="width: 100%; text-align: left; margin-top: 10px;">
+                <tr>
+                    <th style="width: 33%;">Tipo</th>
+                    <th style="width: 33%;">Desperdicio</th>
+                    <th style="width: 33%;">Metros cuadrados</th>
+                </tr>
+                <tr>
+                    <td>Info</td>
+                    <td>Info</td>
+                    <td>Info</td>
+                </tr>
+            
+            </table>
+
+            
+            <table style="width: 100%; text-align: left; border:1px solid black; margin-top: 20px;">
                 <tr >
-                    <th>Material</th>
-                    <th>Unidad de medida</th>
-                    <th>Cantidad</th>
-                    <th>Precio por unidad</th>
+                    <th style="border-bottom:1px solid black; border-right:1px solid black;">Material</th>
+                    <th style="border-bottom:1px solid black; border-right:1px solid black;">Unidad de medida</th>
+                    <th style="border-bottom:1px solid black; border-right:1px solid black;">Cantidad</th>
+                    <th style="border-bottom:1px solid black;">Precio por unidad</th>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -73,29 +73,34 @@
                     <td>1</td>
                 </tr>
             </table>
-            <ul style="text-align: left; margin-top: 50px;">
-                <h3>Notas</h3>
-                <li>
+
+
+            
+            <div style="text-align: left; margin-top: 50px;">
+                <h4>Notas:</h4>
+                <div style="margin-bottom: 15px;">
                     Estas cantidades son aproximadas y no se deben de considerar como
                     definitivas, ya que se deberán de revisar por los responsables de
                     los trabajos.
-                </li>
-                <li>
+                </div>
+                <div style="margin-bottom: 15px;">
                     Solo se indican las cantidades a utilizar, más no así el tipo de
                     anclaje.
-                </li>
-                <li>No se consideran refuerzos, esquinas ni huecos para ventanas.</li>
-                <li>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    No se consideran refuerzos, esquinas ni huecos para ventanas.
+                </div>
+                <div style="margin-bottom: 15px;">
                     En esta explosión de insumos solo se indican las cantidades de
                     perfiles metálicos más no así su dimensión.
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
 
-        </section>
-        <footer>
+        </div>
+        <div style=" margin-top: -4px">
             <img src="/public/img/pdf-footer.jpg" style="width: 100%;" alt="">
-        </footer>
+        </div>
     </div>
     
 </body>

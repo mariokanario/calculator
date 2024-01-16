@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -24,13 +24,11 @@ import datosCielorasoReticular from "./../../json/cielorasoReticular.json";
 import datosMuroInterior from "./../../json/muroInterior.json";
 import datosMuroExterior from "./../../json/muroExterior.json";
 import { useNavigate } from "react-router-dom";
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import IntlCurrencyInput from "react-intl-currency-input"
 import { NumericFormat } from 'react-number-format';
 
 
 const Result = () => {
+
   const navigate = useNavigate();
 
   const f = new Intl.NumberFormat(undefined, {
@@ -40,29 +38,11 @@ const Result = () => {
     maximumFractionDigits: 0,
   })
 
-  const currencyConfig = {
-    locale: "es-ES",
-    formats: {
-      number: {
-        COP: {
-          currency: "COP",
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        },
-      },
-    },
-  };
 
-  /*  const handleChange = (e) => {
-     
-   } */
-
-  const { materials, userData } = useProvider();
+  const { materials, userData, totalData, setTotalData } = useProvider();
 
   const [price, setPrice] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
-  const [totalData, setTotalData] = useState([])
-  const [valPrices, setValPrices] = useState({});
   const [complementos, setComplementos] = useState()
   const [materiales, setMateriales] = useState()
   const [metales, setMetales] = useState()
@@ -154,6 +134,7 @@ const Result = () => {
 
   }, [materiales, complementos, metales])
 
+
   const manejarCambio = (nombre, valor, grupo) => {
     if (grupo === 1) {
       const data = materiales
@@ -197,33 +178,20 @@ const Result = () => {
   };
 
 
-  /* PRINT */
+  /* PDF */
 
-  const downloadPDF = () => {
-    const capture = document.querySelector("#print")
-
-    const margenSuperior = 60;
-    const margenInferior = 50;
-    const margenIzquierdo = 20;
-    const margenDerecho = 20;
-
-    html2canvas(capture).then((canvas) => {
-      const imgData = canvas.toDataURL('/img/png')
-      const doc = new jsPDF('p', 'mm', 'a4')
-      const componentWidth = doc.internal.pageSize.getWidth()
-      const componentHeight = doc.internal.pageSize.getHeight()
-
-      doc.setDrawColor(255, 255, 255);
-      doc.rect(margenIzquierdo, margenSuperior, componentWidth - margenIzquierdo - margenDerecho, componentHeight - margenSuperior - margenInferior, 'F');
-
-      doc.addImage('/img/bg-pdf.jpg', 'JPEG', 0, 0, componentWidth, componentHeight);
-
-      doc.addImage(imgData, 'PNG', margenIzquierdo, margenSuperior, componentWidth - margenIzquierdo - margenDerecho, componentHeight - margenSuperior - margenInferior);
-      // doc.addImage(imgData, 'PNG', 0, 0, componentWidth, componentHeight)
-      doc.save('calculadora.pdf')
+  const createPdf = () => {
+    setTotalData({
+      userData,
+      materials: { 
+        ...materials, 
+        totalPrice, 
+        values: [...materiales] 
+      }
     })
+    
   }
-
+  console.log(totalData);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
@@ -240,7 +208,7 @@ const Result = () => {
           <Card className="menu-result flex flex-row box-border p-5 justify-around gap-5 rounded-none rounded-t-lg mr-5">
             <Tooltip content="Descargar" color="primary">
               <Button size="lg" className='text-xl' isIconOnly color="primary"
-                onClick={downloadPDF}>
+                onClick={createPdf}>
                 <FaFileDownload />
               </Button>
             </Tooltip>
