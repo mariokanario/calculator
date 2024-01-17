@@ -181,7 +181,6 @@ const Result = () => {
   /* PDF */
 
   const createPdf = () => {
-    alert("Entro")
     localStorage.pdf = JSON.stringify({
       userData,
       materials: {
