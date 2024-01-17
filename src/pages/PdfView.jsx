@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactPDF, { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
-import DocuPDF from '../components/pdf/docuPDF';
+import DocuPDF from './../components/pdf/DocuPDF';
 import { Button } from '@nextui-org/react';
 
 
