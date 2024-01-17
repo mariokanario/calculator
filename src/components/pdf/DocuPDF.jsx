@@ -56,7 +56,7 @@ const DocuPDF = () => {
         <Document>
             <Page size="A4">
                 <View>
-                    <Image src="/public/img/pdf-header.jpg" style="width: 100%; " alt="" />
+                    <Image src="/img/pdf-header.jpg" style="width: 100%; " alt="" />
                 </View>
 
                 <View style={{
@@ -194,7 +194,7 @@ const DocuPDF = () => {
                 </View>
 
                 <View style=" margin-top: -4px">
-                    <Image src="/public/img/pdf-footer.jpg" style="width: 100%;" alt="" />
+                    <Image src="/img/pdf-footer.jpg" style="width: 100%;" alt="" />
                 </View>
             </Page>
         </Document>
