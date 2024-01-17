@@ -25,8 +25,6 @@ import datosMuroInterior from "./../../json/muroInterior.json";
 import datosMuroExterior from "./../../json/muroExterior.json";
 import { Router, useNavigate } from "react-router-dom";
 import { NumericFormat } from 'react-number-format';
-import { PDFDownloadLink } from '@react-pdf/renderer'
-import DocuPDF from "../components/pdf/docuPDF";
 
 
 const Result = () => {
