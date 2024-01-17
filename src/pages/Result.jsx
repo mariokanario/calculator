@@ -6,7 +6,6 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  getKeyValue,
   Card,
   Button,
   CardBody,
@@ -23,8 +22,9 @@ import datosCielorasoCorridoExt from "./../../json/cielorasoCorridoExt.json";
 import datosCielorasoReticular from "./../../json/cielorasoReticular.json";
 import datosMuroInterior from "./../../json/muroInterior.json";
 import datosMuroExterior from "./../../json/muroExterior.json";
-import { Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { NumericFormat } from 'react-number-format';
+import whatsapp from "./../../json/whatsapp.json"
 
 
 const Result = () => {
@@ -190,18 +190,10 @@ const Result = () => {
       }
     })
     
-    navigate('/PdfView')
-   /*  setTotalData({
-      userData,
-      materials: { 
-        ...materials, 
-        totalPrice, 
-        values: [...materiales] 
-      }
-    }) */
+    window.open('/PdfView')
     
   }
-  console.log(  materiales );
+  // console.log(  materiales );
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
@@ -238,7 +230,7 @@ const Result = () => {
             </Tooltip>
             <Tooltip content="Contactar" color="primary">
               <Button size="lg" className="text-xl" isIconOnly color="primary">
-                <a href="https://wa.me/573185480907/?text=Hola%20acabo%20de%20realizar%20una%20cotización%20desde%20la%20web"
+                <a href={`https://wa.me/57${whatsapp.number}/?text=Hola%20acabo%20de%20realizar%20una%20cotización%20desde%20la%20web`}
                   target="_blank">
                   <IoLogoWhatsapp />
                 </a>

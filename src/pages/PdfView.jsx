@@ -5,6 +5,7 @@ import { Button } from '@nextui-org/react';
 
 
 const PdfView = () => {
+
   return (
     <>
           <div style={{ width: "100vw", maxWidth: "600px", margin: "auto" }}>

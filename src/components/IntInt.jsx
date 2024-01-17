@@ -55,7 +55,7 @@ const IntInt = () => {
         setMaterials({ ...materials, values: items })
     }
 
-    console.log(materials);
+    // console.log(materials);
 
 
     return (
