@@ -6,6 +6,7 @@ import Type from "../pages/Type";
 import Adjust from "../pages/Adjust";
 import Meter from "../pages/Meter";
 import Result from "../pages/Result";
+import PdfView from "../pages/PdfView";
 
 export const router = createBrowserRouter([
     {
@@ -27,5 +28,9 @@ export const router = createBrowserRouter([
     {
         path: "/result",
         element: <Result />,
+    },
+    {
+        path: "/pdfView",
+        element: <PdfView />,
     },
 ]);

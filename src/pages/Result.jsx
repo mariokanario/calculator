@@ -23,8 +23,10 @@ import datosCielorasoCorridoExt from "./../../json/cielorasoCorridoExt.json";
 import datosCielorasoReticular from "./../../json/cielorasoReticular.json";
 import datosMuroInterior from "./../../json/muroInterior.json";
 import datosMuroExterior from "./../../json/muroExterior.json";
-import { useNavigate } from "react-router-dom";
+import { Router, useNavigate } from "react-router-dom";
 import { NumericFormat } from 'react-number-format';
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import DocuPDF from "../components/pdf/docuPDF";
 
 
 const Result = () => {
@@ -43,9 +45,9 @@ const Result = () => {
 
   const [price, setPrice] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
-  const [complementos, setComplementos] = useState()
-  const [materiales, setMateriales] = useState()
-  const [metales, setMetales] = useState()
+  const [complementos, setComplementos] = useState([])
+  const [materiales, setMateriales] = useState([])
+  const [metales, setMetales] = useState([])
 
 
   useEffect(() => {
@@ -181,17 +183,27 @@ const Result = () => {
   /* PDF */
 
   const createPdf = () => {
-    setTotalData({
+    localStorage.pdf = JSON.stringify({
+      userData,
+      materials: {
+        ...materials,
+        totalPrice,
+        values: [...materiales, ...complementos, ...metales]
+      }
+    })
+    
+    navigate('/PdfView')
+   /*  setTotalData({
       userData,
       materials: { 
         ...materials, 
         totalPrice, 
         values: [...materiales] 
       }
-    })
+    }) */
     
   }
-  console.log(totalData);
+  console.log(  materiales );
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
@@ -207,10 +219,19 @@ const Result = () => {
           </div>
           <Card className="menu-result flex flex-row box-border p-5 justify-around gap-5 rounded-none rounded-t-lg mr-5">
             <Tooltip content="Descargar" color="primary">
+
+
               <Button size="lg" className='text-xl' isIconOnly color="primary"
                 onClick={createPdf}>
-                <FaFileDownload />
+                
+                  <FaFileDownload />
               </Button>
+              
+
+              {/* <Button size="lg" className='text-xl' isIconOnly color="primary"
+                onClick={createPdf}>
+                
+              </Button> */}
             </Tooltip>
             <Tooltip content="Enviar a email" color="primary">
               <Button size="lg" className="text-xl" isIconOnly color="primary">

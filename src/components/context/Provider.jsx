@@ -13,7 +13,11 @@ const Provider = ({ children }) => {
 
   const [userData, setUserData] = useState()
 
-  const [totalData, setTotalData] = useState({})
+  const [totalData, setTotalData] = useState({
+    userData: {
+      name: "Pedro"
+    }
+  })
 
   return (
     <Context.Provider value={{ materials, setMaterials, userData, setUserData, totalData, setTotalData  } }>
