@@ -190,7 +190,7 @@ const Result = () => {
       }
     })
     
-    window.open('/PdfView')
+    window.open('/#/PdfView')
     
   }
   // console.log(  materiales );
