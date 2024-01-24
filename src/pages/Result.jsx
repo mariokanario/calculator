@@ -192,7 +192,7 @@ const Result = () => {
       project_type: userData.typeProject,
       items: [...material, ...complement, ...metales],
     };
-    const response = await fetch("/src/index.php?option=create_seco", {
+    const response = await fetch(`${window.location.origin}${window.location.pathname}src/index.php?option=create_seco`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -256,7 +256,7 @@ const Result = () => {
       },
     });
 
-    window.open("/#/PdfView");
+    window.open(`${window.location.origin}${window.location.pathname}#/PdfView`);
   };
   // console.log(  materiales );
 
