@@ -10,7 +10,7 @@ import { useProvider } from './context/Provider';
 const IntInt = () => {
 
     const navigate = useNavigate();
-    const { setMaterials, materials } = useProvider()
+    const { setMaterials, materials, muroInterior } = useProvider()
     const [level, setLevel] = useState("")
 
     useEffect(() => {
@@ -73,13 +73,12 @@ const IntInt = () => {
                         }}
                     >
                         <h2 className='title-radio'>Cara 1</h2>
-                        <Radio value="Light 12.7 mm">Light 12.7 mm</Radio>
-                        <Radio value="RH 12.7 mm">RH 12.7 mm</Radio>
-                        <Radio value="RH 15.9 mm">RH 15.9 mm</Radio>
-                        <Radio value="RF 12.7 mm">RF 12.7 mm</Radio>
-                        <Radio value="RF 15.9 mm">RF 15.9 mm</Radio>
-                        <Radio value="Anti Moho 12.7 mm">Anti Moho 12.7 mm</Radio>
-                        <Radio value="Acustik 12 mm">Acustik 12 mm</Radio>
+                        {
+                            Object.keys(muroInterior?.cara1)?.map(cara => (
+                                <Radio value={cara}>{cara}</Radio>
+                            ))
+                        }
+                       
                         {formik.touched.cara1 && formik.errors.cara1 && (
                             <small className="text-danger">{formik.errors.cara1}</small>
                         )}
@@ -95,13 +94,11 @@ const IntInt = () => {
                         }}
                     >
                         <h2 className='title-radio'>Cara 2</h2>
-                        <Radio value="Light 12.7 mm">Light 12.7 mm</Radio>
-                        <Radio value="RH 12.7 mm">RH 12.7 mm</Radio>
-                        <Radio value="RH 15.9 mm">RH 15.9 mm</Radio>
-                        <Radio value="RF 12.7 mm">RF 12.7 mm</Radio>
-                        <Radio value="RF 15.9 mm">RF 15.9 mm</Radio>
-                        <Radio value="Anti Moho 12.7 mm">Anti Moho 12.7 mm</Radio>
-                        <Radio value="Acustik 12 mm">Acustik 12 mm</Radio>
+                        {
+                            Object.keys(muroInterior?.cara2)?.map(cara => (
+                                <Radio value={cara}>{cara}</Radio>
+                            ))
+                        }
                         {formik.touched.cara2 && formik.errors.cara2 && (
                             <small className="text-danger">{formik.errors.cara2}</small>
                         )}
@@ -139,13 +136,11 @@ const IntInt = () => {
                         }}
                     >
                         <h2 className='title-radio'>Aislante</h2>
-                        <Radio value="Frescasa Eco 2,5 (rollos de 9 m2)">Frescasa Eco 2,5" (rollos de 9 m2)</Radio>
-                        <Radio value="Frescasa Eco 3,5 (rollos de 9 m2)">Frescasa Eco 3,5" (rollos de 9 m2)"</Radio>
-                        <Radio value="Isover Arena 60 (rollos 12,4 m2)">Isover Arena 60 (rollos 12,4 m2)</Radio>
-                        <Radio value="Acustifibra">Acustifibra</Radio>
-                        <Radio value="Acustic Control VP">Acustic Control VP</Radio>
-                        <Radio value="Black Theater 1">Black Theater 1"</Radio>
-                        <Radio value="Black Theater 2">Black Theater 2"</Radio>
+                        {
+                            Object.keys(muroInterior?.aislante)?.map(ais => (
+                                <Radio value={ais}>{ais}</Radio>
+                            ))
+                        }
                         {formik.touched.aislante && formik.errors.aislante && (
                             <small className="text-danger">{formik.errors.aislante}</small>
                         )}
@@ -161,9 +156,11 @@ const IntInt = () => {
                         }}
                     >
                         <h2 className='title-radio'>Nivel de acabado</h2>
-                        <Radio value="Sin Acabado" >Sin Acabado</Radio>
-                        <Radio value="5 Plaka Finish">5 Plaka Finish</Radio>
-                        <Radio value="RD + MIX">RD + MIX</Radio>
+                        {
+                            Object.keys(muroInterior?.acabado)?.map(aca => (
+                                <Radio value={aca}>{aca}</Radio>
+                            ))
+                        }
                         {
                             level == "RD + MIX" &&
                             <Slider

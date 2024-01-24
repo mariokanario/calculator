@@ -10,7 +10,7 @@ import { useProvider } from './context/Provider';
 const MuroFachada = () => {
 
     const navigate = useNavigate();
-    const { setMaterials, materials } = useProvider()
+    const { setMaterials, materials, muroExterior } = useProvider()
 
     useEffect(() => {
         setMaterials({ ...materials, values: [] })
@@ -70,8 +70,11 @@ const MuroFachada = () => {
                         }}
                     >
                         <h2 className='title-radio'>Cara 1</h2>
-                        <Radio value="AquarocMax 11 mm">AquarocMax 11 mm</Radio>
-                        <Radio value="X-terium 12.7 mm">X-terium 12.7 mm</Radio>
+                        {
+                            Object.keys(muroExterior?.cara1)?.map(cara => (
+                                <Radio value={cara}>{cara}</Radio>
+                            ))
+                        }
                         {formik.touched.cara1 && formik.errors.cara1 && (
                             <small className="text-danger">{formik.errors.cara1}</small>
                         )}
@@ -87,14 +90,11 @@ const MuroFachada = () => {
                         }}
                     >
                         <h2 className='title-radio'>Cara 2</h2>
-                        <Radio value="AquarocMax 11 mm">AquarocMax 11 mm</Radio>
-                        <Radio value="X-terium 12.7 mm">X-terium 12.7 mm</Radio>
-                        <Radio value="Placa de Fibrocemento de 6 mm">Placa de Fibrocemento de 6 mm</Radio>
-                        <Radio value="Placa de Fibrocemento de 8 mm">Placa de Fibrocemento de 8 mm</Radio>
-                        <Radio value="Placa de Fibrocemento de 10 mm">Placa de Fibrocemento de 10 mm</Radio>
-                        <Radio value="Placa de Fibrocemento de 14 mm">Placa de Fibrocemento de 14 mm</Radio>
-                        <Radio value="Placa de Fibrocemento de 17 mm">Placa de Fibrocemento de 17 mm</Radio>
-                        <Radio value="Placa de Fibrocemento de 20 mm">Placa de Fibrocemento de 20 mm</Radio>
+                        {
+                            Object.keys(muroExterior?.cara2)?.map(cara => (
+                                <Radio value={cara}>{cara}</Radio>
+                            ))
+                        }
                         {formik.touched.cara2 && formik.errors.cara2 && (
                             <small className="text-danger">{formik.errors.cara2}</small>
                         )}
@@ -132,8 +132,11 @@ const MuroFachada = () => {
                         }}
                     >
                         <h2 className='title-radio'>Aislante</h2>
-                        <Radio value="Isover Arena 60 (rollos 12,4 m2)">Isover Arena 60 (rollos 12,4 m2)</Radio>
-                        <Radio value="Ecovent 80 (laminas 0,81m2)">Ecovent 80 (laminas 0,81m2) </Radio>
+                        {
+                            Object.keys(muroExterior?.aislante)?.map(ais => (
+                                <Radio value={ais}>{ais}</Radio>
+                            ))
+                        }
                         {formik.touched.aislante && formik.errors.aislante && (
                             <small className="text-danger">{formik.errors.aislante}</small>
                         )}

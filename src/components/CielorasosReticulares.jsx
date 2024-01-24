@@ -9,7 +9,7 @@ import { useProvider } from './context/Provider';
 
 const CielorasosReticulares = () => {
 
-    const { setMaterials, materials } = useProvider()
+    const { setMaterials, materials, cielorasoReticular } = useProvider()
 
     useEffect(() => {
         setMaterials({ ...materials, values: [] })
@@ -69,13 +69,11 @@ const CielorasosReticulares = () => {
                         }}
                     >
                         <h2 className='title-radio'>Tipo</h2>
-                        <Radio value="Sky Clean 60,3 cm x 60,3 cm">Sky Clean 60,3 cm x 60,3 cm</Radio>
-                        <Radio value="Urban 60,3 cm x 60,3 cm">Urban 60,3 cm x 60,3 cm</Radio>
-                        <Radio value="Duracustic 1,22m x 0,61 m">Duracustic 1,22m x 0,61 m</Radio>
-                        <Radio value="Clouds 1 1,22 m X 2,40 m">Clouds 1" 1,22 m X 2,40 m</Radio>
-                        <Radio value="Black Theater 1 1,22 m X 2,40 m">Black Theater 1" 1,22 m X 2,40 m</Radio>
-                        <Radio value="Clouds 2 1,22 m X 2,40 m">Clouds 2" 1,22 m X 2,40 m</Radio>
-                        <Radio value="Black Theater 2 1,22 m X 2,40 m">Black Theater 2" 1,22 m X 2,40 m</Radio>
+                        {
+                            Object.keys(cielorasoReticular?.placa)?.map(pla => (
+                                <Radio value={pla}>{pla}</Radio>
+                            ))
+                        }
                         {formik.touched.tipo && formik.errors.tipo && (
                             <small className="text-danger">{formik.errors.tipo}</small>
                         )}
@@ -93,10 +91,12 @@ const CielorasosReticulares = () => {
                         }
                     >
                         <h2 className='title-radio'>Suspención</h2>
-                        <Radio value="T Principal (3.66m)">T Principal (3.66m)</Radio>
-                        <Radio value="T Secundaria (61cm)">T Secundaria (61cm)</Radio>
-                        <Radio value="T Secundaria (1.22m)">T Secundaria (1.22m)</Radio>
-                        <Radio value="Ángulo Perimetral (3.05m)">Ángulo Perimetral (3.05m)</Radio>
+                        {
+                            Object.keys(cielorasoReticular?.suspencion)?.map(sus => (
+                                <Radio value={sus}>{sus}</Radio>
+                            ))
+                        }
+                       
                         {formik.touched.suspencion && formik.errors.suspencion && (
                             <small className="text-danger">{formik.errors.suspencion}</small>
                         )

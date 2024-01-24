@@ -6,10 +6,12 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useProvider } from './context/Provider';
 
+
 const CielorasosCorridos = () => {
 
-    const {setMaterials, materials} = useProvider()
-    
+    const { setMaterials, materials, cielorasoCorridoExt, cielorasoCorridoInt } = useProvider()
+
+
     useEffect(() => {
         setMaterials({ ...materials, values: [] })
     }, [])
@@ -52,16 +54,15 @@ const CielorasosCorridos = () => {
     const addElement = (tipo, nombre) => {
         let items = materials.values
         const findElement = items?.findIndex(e => e.tipo == tipo)
-        if(findElement == -1 ){
-            items.push({ tipo, nombre})
-        }else {
+        if (findElement == -1) {
+            items.push({ tipo, nombre })
+        } else {
             items[findElement] = { tipo, nombre }
         }
 
-        setMaterials({...materials, values: items})
+        setMaterials({ ...materials, values: items })
     }
 
-    // console.log(materials);
 
     return (
         <>
@@ -78,7 +79,7 @@ const CielorasosCorridos = () => {
                             let item = materials
                             item.subtipo = target.value
                             setMaterials({ ...item })
-                            
+
                         }}
                     >
                         <h2 className='title-radio'>Tipo</h2>
@@ -104,20 +105,21 @@ const CielorasosCorridos = () => {
                         {
                             option == "interior" &&
                             <>
-                                <Radio value="Placa Light 12.7 mm">Placa Light 12.7 mm</Radio>
-                                <Radio value="Placa RH 12.7 mm">Placa RH 12.7 mm</Radio>
-                                <Radio value="Placa RH 15.9 mm">Placa RH 15.9 mm</Radio>
-                                <Radio value="Placa RF 12.7 mm">Placa RF 12.7 mm</Radio>
-                                <Radio value="Placa RF 15.9 mm">Placa RF 15.9 mm</Radio>
-                                <Radio value="Placa Anti Moho 12.7 mm">Placa Anti Moho 12.7 mm</Radio>
-                                <Radio value="Placa Acustik 12 mm">Placa Acustik 12 mm</Radio>
+                                {
+                                    Object.keys(cielorasoCorridoInt?.placa)?.map(pla => (
+                                        <Radio value={pla}>{pla}</Radio>
+                                    ))
+                                }
                             </>
                         }
                         {
                             option == "exterior" &&
                             <>
-                                <Radio value="Placa AquarocMax 11 mm">Placa AquarocMax 11 mm</Radio>
-                                <Radio value="Placa X-terium 12.7 mm">Placa X-terium 12.7 mm</Radio>
+                                {
+                                    Object.keys(cielorasoCorridoExt?.placa)?.map(pla => (
+                                        <Radio value={pla}>{pla}</Radio>
+                                    ))
+                                }
                             </>
                         }
                         {formik.touched.placa && formik.errors.placa && (
@@ -135,8 +137,8 @@ const CielorasosCorridos = () => {
                             formik.setFieldValue("desperdicio", target.value)
                             let item = materials
                             item.desperdicio = target.value
-                            setMaterials({...item})
-                    }}
+                            setMaterials({ ...item })
+                        }}
                     >
                         <h2 className='title-radio'>% de desperdicio</h2>
                         {
@@ -166,17 +168,25 @@ const CielorasosCorridos = () => {
                     >
                         <h2 className='title-radio'>Aislante</h2>
                         {
-                            option != "" &&
+                            option == "interior" &&
                             <>
-                                <Radio value="Isover Arena 60 (rollos 12,4 m2)">Isover Arena 60 (rollos 12,4 m2)</Radio>
-                                <Radio value="Frescasa Eco 2,5 (rollos de 9 m2)">Frescasa Eco 2,5" (rollos de 9 m2)</Radio>
-                                <Radio value="Frescasa Eco 3,5 (rollos de 9 m2)">Frescasa Eco 3,5" (rollos de 9 m2)</Radio>
-                                <Radio value="Sin aislante">Sin aislante</Radio>
+                                {
+                                    Object.keys(cielorasoCorridoInt?.aislante)?.map(pla => (
+                                        <Radio value={pla}>{pla}</Radio>
+                                    ))
+                                }
                             </>
                         }
-                        {formik.touched.aislante && formik.errors.aislante && (
-                            <small className="text-danger">{formik.errors.aislante}</small>
-                        )}
+                        {
+                            option == "exterior" &&
+                            <>
+                                {
+                                    Object.keys(cielorasoCorridoExt?.aislante)?.map(pla => (
+                                        <Radio value={pla}>{pla}</Radio>
+                                    ))
+                                }
+                            </>
+                        }
                     </RadioGroup>
 
 
@@ -195,9 +205,12 @@ const CielorasosCorridos = () => {
                             option == "exterior" &&
                             <>
                                 <h2 className='title-radio'>Nivel de acabado</h2>
-                                <Radio value="Sin Acabado">Sin Acabado</Radio>
-                                <Radio value="5 Plaka Finish">5 Plaka Finish</Radio>
-                                <Radio value="Masilla Acrilica">Masilla Acrilica</Radio>
+
+                                {
+                                    Object.keys(cielorasoCorridoExt?.acabado)?.map(aca => (
+                                        <Radio value={aca}>{aca}</Radio>
+                                    ))
+                                }
                                 {/* <Radio value="RD + MIX" onChange={(e) => setLevel(e.target.value)}>RD + MIX</Radio> */}
                                 {formik.touched.acabado && formik.errors.acabado && (
                                     <small className="text-danger">{formik.errors.acabado}</small>
