@@ -26,12 +26,12 @@ const Provider = ({ children }) => {
   const [whatsapp, setWhatsapp] = useState();
 
   useEffect(() => {
-    fetchData("/json/cielorasoCorridoExt.json", setCielorasoCorridoExt);
-    fetchData("/json/cielorasoCorridoInt.json", setCielorasoCorridoInt);
-    fetchData("/json/cielorasoReticular.json", setCielorasoReticular);
-    fetchData("/json/muroExterior.json", setMuroExterior);
-    fetchData("/json/muroInterior.json", setMuroInterior);
-    fetchData("/json/whatsapp.json", setWhatsapp);
+    fetchData("json/cielorasoCorridoExt.json", setCielorasoCorridoExt);
+    fetchData("json/cielorasoCorridoInt.json", setCielorasoCorridoInt);
+    fetchData("json/cielorasoReticular.json", setCielorasoReticular);
+    fetchData("json/muroExterior.json", setMuroExterior);
+    fetchData("json/muroInterior.json", setMuroInterior);
+    fetchData("json/whatsapp.json", setWhatsapp);
   }, []);
 
   const fetchData = async (url, set) => {

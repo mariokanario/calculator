@@ -56,7 +56,6 @@ const Result = () => {
   const [metales, setMetales] = useState([]);
 
   useEffect(() => {
-    console.log("userData", userData);
     const datosJson = data();
     if (datosJson) {
       const priceInfoOne = materials?.values?.map((material) => ({
@@ -152,15 +151,17 @@ const Result = () => {
           .filter((e) => e);
 
         setMetales(priceInfoThree);
-
-        sendDataServer(priceInfoOne, priceInfoTwo, priceInfoThree).then(
-          (e) => {}
-        );
-      } else {
-        sendDataServer(priceInfoOne, priceInfoTwo, []).then((e) => {});
-      }
+      } 
     }
   }, [materials]);
+
+  useEffect(() => {
+    if(materiales?.length > 0 && complementos?.length > 0){
+      sendDataServer(materiales, complementos, metales).then(
+        (e) => {}
+      );
+    }
+  }, [materiales, complementos])
 
   useEffect(() => {
     let tempTotalPriceMat = materiales
@@ -451,7 +452,7 @@ const Result = () => {
                         ))
                       : null}
 
-                    {metales != undefined ? (
+                    {metales && metales?.length > 0 ? (
                       <TableRow key={101} className="text-left">
                         <TableCell>
                           <h2 className="font-semibold text-base">Metales</h2>
@@ -462,7 +463,7 @@ const Result = () => {
                       </TableRow>
                     ) : null}
 
-                    {metales != undefined
+                    {metales && metales?.length > 0
                       ? metales.map((metal, i) => {
                           return (
                             <TableRow key={i + 20} className="text-left">

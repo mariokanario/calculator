@@ -12,12 +12,12 @@ const Type = () => {
   const listFirst = [
     {
       title: "Cielorasos",
-      img: "/img/cieloraso.jpg",
+      img: `${window.location.origin}${window.location.pathname}img/cieloraso.jpg`,
       href: "/type?type=cielorasos",
     },
     {
       title: "Muros",
-      img: "/img/muro.jpg",
+      img: `${window.location.origin}${window.location.pathname}img/muro.jpg`,
       href: "/type?type=muros",
     },
 
@@ -26,12 +26,12 @@ const Type = () => {
   const listCielorasos = [
     {
       title: "Cieloraso Corrido",
-      img: "/img/cieloraso_corrido.jpg",
+      img: `${window.location.origin}${window.location.pathname}img/cieloraso_corrido.jpg`,
       href: "/adjust?type=cielorasosCorridos",
     },
     {
       title: "Cieloraso Reticular",
-      img: "/img/cieloraso_reticular.jpg",
+      img: `${window.location.origin}${window.location.pathname}img/cieloraso_reticular.jpg`,
       href: "/adjust?type=cielorasosReticulares",
     },
 
@@ -40,12 +40,12 @@ const Type = () => {
   const listMuros = [
     {
       title: "Muro Interior",
-      img: "/img/int_int.jpg",
+      img: `${window.location.origin}${window.location.pathname}img/int_int.jpg`,
       href: "/adjust?type=intInt",
     },
     {
       title: "Muro Facahada",
-      img: "/img/muro_ext.jpg",
+      img: `${window.location.origin}${window.location.pathname}img/muro_ext.jpg`,
       href: "/adjust?type=muroFachada",
     },
     /*{
