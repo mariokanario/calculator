@@ -79,7 +79,7 @@ const DocuPDF = () => {
             backgroundColor: "#FFCF00",
             width: "88%",
             margin: "0 auto",
-            padding: "20px",
+            padding: "0 20px",
           }}
         >
           <Text style={{ margin: "0 0 10px 0" }}>Cálculo construcción en seco</Text>
@@ -146,7 +146,7 @@ const DocuPDF = () => {
             backgroundColor: "#FFCF00",
             width: "88%",
             margin: "0 auto",
-            padding: "20px",
+            padding: "0 20px",
           }}
         >
           <View style={styles.sectionTwo}>

@@ -70,6 +70,7 @@ const Result = () => {
         ),
         precio: 0,
         subtotal: 0,
+        tipo: material.tipo == "placa" ? "Tipo Placa" : material.tipo
       }));
       setMateriales(priceInfoOne);
 
@@ -87,7 +88,7 @@ const Result = () => {
         subtotal: 0,
       }));
       setComplementos(priceInfoTwo);
-      console.log(datosJson?.metales)
+      // console.log(datosJson?.metales)
       if (datosJson?.metales) {
         const priceInfoThree = datosJson?.metales
           ?.map((metal) => {
@@ -149,7 +150,7 @@ const Result = () => {
             return null;
           })
           .filter((e) => e);
-          console.log("-------", priceInfoThree);
+          // console.log("-------", priceInfoThree);
         setMetales(priceInfoThree);
       } 
     }
@@ -263,7 +264,7 @@ const Result = () => {
 
     window.open(`${window.location.origin}${window.location.pathname}#/PdfView`);
   };
-  // console.log(  materiales );
+  console.log(  materials );
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
@@ -391,7 +392,7 @@ const Result = () => {
                   <TableBody>
                     {materiales?.map((material, i) => (
                       <TableRow key={i} className="text-left">
-                        <TableCell>{material.nombre}</TableCell>
+                        <TableCell><span className="font-bold capitalize">{material.tipo}:</span> {material.nombre}</TableCell>
                         <TableCell>{material.medida}</TableCell>
                         <TableCell>{material.cantidad}</TableCell>
                         {price ? (
