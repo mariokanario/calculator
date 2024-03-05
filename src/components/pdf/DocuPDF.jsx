@@ -19,11 +19,19 @@ const DocuPDF = () => {
       height: "100%",
     },
     title: {
-      fontSize: "14px",
-      fontWeight: "bold",
+      fontSize: "12px",
+      fontWeight: '900',
+    }, 
+    titleOther: {
+      fontSize: "12px",
+      margin: "5px",
     },
     paragraph: {
-      fontSize: "12px",
+      fontSize: "10px",
+      fontWeight: "normal",
+    },
+    paragraphNote: {
+      fontSize: "9px",
       fontWeight: "normal",
     },
     sectionOne: {
@@ -31,7 +39,6 @@ const DocuPDF = () => {
       flexDirection: "row",
       flexWrap: "wrap",
       gap: "10px 50px",
-      marginTop: "25px",
     },
     sectionTwo: {
       display: "flex",
@@ -43,7 +50,7 @@ const DocuPDF = () => {
     tableTh: {
       width: "25%",
       border: "1px solid black",
-      padding: "5px",
+      padding: "2px 5px",
     },
   });
 
@@ -75,7 +82,7 @@ const DocuPDF = () => {
             padding: "20px",
           }}
         >
-          <Text>Cálculo construcción en seco</Text>
+          <Text style={{ margin: "0 0 10px 0" }}>Cálculo construcción en seco</Text>
           <View style={styles.sectionOne}>
             <View>
               <Text style={styles.title}>Cliente:</Text>
@@ -111,7 +118,7 @@ const DocuPDF = () => {
             backgroundColor: "#FFCF00",
             width: "88%",
             margin: "0 auto",
-            padding: "20px",
+            padding: "10px 20px",
           }}
         >
           <View style={styles.sectionOne}>
@@ -156,7 +163,7 @@ const DocuPDF = () => {
               <Text style={styles.title}>Precio por unidad:</Text>
             </View>
           </View>
-          {data.materials.values.map((val) => (
+          {data.materials.values.materiales.map((val) => (
             <View style={styles.sectionTwo}>
               <View style={styles.tableTh}>
                 <Text style={styles.paragraph}> {val.nombre} </Text>
@@ -172,6 +179,50 @@ const DocuPDF = () => {
               </View>
             </View>
           ))}
+          {
+            data.materials.values.complementos.length > 0 &&
+            <Text style={styles.titleOther}> Complementos </Text>
+          }
+          {
+            data.materials.values.complementos.length > 0 &&
+            data.materials.values.complementos.map((val) => (
+                <View style={styles.sectionTwo}>
+                  <View style={styles.tableTh}>
+                    <Text style={styles.paragraph}> {val.nombre} </Text>
+                  </View>
+                  <View style={styles.tableTh}>
+                    <Text style={styles.paragraph}> {val.medida} </Text>
+                  </View>
+                  <View style={styles.tableTh}>
+                    <Text style={styles.paragraph}> {val.cantidad} </Text>
+                  </View>
+                  <View style={styles.tableTh}>
+                    <Text style={styles.paragraph}> {f.format(val.subtotal)} </Text>
+                  </View>
+                </View>
+            ))}
+            {
+            data.materials.values.metales.length > 0 &&
+            <Text style={styles.titleOther}> Metales </Text>
+            }
+          {
+            data.materials.values.metales.length > 0 &&
+            data.materials.values.metales.map((val) => (
+                <View style={styles.sectionTwo}>
+                  <View style={styles.tableTh}>
+                    <Text style={styles.paragraph}> {val.nombre} </Text>
+                  </View>
+                  <View style={styles.tableTh}>
+                    <Text style={styles.paragraph}> {val.medida} </Text>
+                  </View>
+                  <View style={styles.tableTh}>
+                    <Text style={styles.paragraph}> {val.cantidad} </Text>
+                  </View>
+                  <View style={styles.tableTh}>
+                    <Text style={styles.paragraph}> {f.format(val.subtotal)} </Text>
+                  </View>
+                </View>
+            ))}
           <View style={styles.sectionTwo}>
             <View style={styles.tableTh}>
               <Text style={styles.paragraph}> Total: </Text>
@@ -190,23 +241,23 @@ const DocuPDF = () => {
             backgroundColor: "#FFCF00",
             width: "88%",
             margin: "0 auto",
-            padding: "20px",
+            padding: "0 20px",
           }}
         >
           <Text style={styles.title}>Notas</Text>
-          <Text style={styles.paragraph}>
+          <Text style={styles.paragraphNote}>
             Estas cantidades son aproximadas y no se deben de considerar como
             definitivas, ya que se deberán de revisar por los responsables de
             los trabajos.
           </Text>
-          <Text style={styles.paragraph}>
+          <Text style={styles.paragraphNote}>
             Solo se indican las cantidades a utilizar, más no así el tipo de
             anclaje.
           </Text>
-          <Text style={styles.paragraph}>
+          <Text style={styles.paragraphNote}>
             No se consideran refuerzos, esquinas ni huecos para ventanas.
           </Text>
-          <Text style={styles.paragraph}>
+          <Text style={styles.paragraphNote}>
             En esta explosión de insumos solo se indican las cantidades de
             perfiles metálicos más no así su dimensión.
           </Text>

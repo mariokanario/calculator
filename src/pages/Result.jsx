@@ -253,7 +253,11 @@ const Result = () => {
       materials: {
         ...materials,
         totalPrice,
-        values: [...materiales, ...complementos, ...metales],
+        values: {
+          materiales: [...materiales],
+          complementos: [...complementos],
+          metales: [...metales]
+        },
       },
     });
 

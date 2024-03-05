@@ -51,7 +51,6 @@ const CielorasosReticulares = () => {
         setMaterials({ ...materials, values: items })
     }
 
-    console.log(materials);
 
     return (
         <>

@@ -8,7 +8,7 @@ import { useProvider } from './context/Provider';
 
 
 const MeterForm = () => {
-
+    
     const navigate = useNavigate();
     const { materials, setMaterials } = useProvider()
 
@@ -88,7 +88,7 @@ const MeterForm = () => {
                                 type="number"
                                 min={0}
                                 max={1000000}
-                                label="Ancho"
+                                label={materials.tipo == "Cieloraso Reticular" || materials.tipo == "Cieloraso Corrido" ? "Ancho" : "Alto"}
                                 placeholder="10 m"
                                 id="ancho"
                                 value={ancho}
