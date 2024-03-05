@@ -87,8 +87,8 @@ const Result = () => {
         subtotal: 0,
       }));
       setComplementos(priceInfoTwo);
-
-      if (materials?.metales) {
+      console.log(datosJson?.metales)
+      if (datosJson?.metales) {
         const priceInfoThree = datosJson?.metales
           ?.map((metal) => {
             if (metal?.equal?.length > 0) {
@@ -149,7 +149,7 @@ const Result = () => {
             return null;
           })
           .filter((e) => e);
-
+          console.log("-------", priceInfoThree);
         setMetales(priceInfoThree);
       } 
     }
@@ -471,9 +471,9 @@ const Result = () => {
                       ? metales.map((metal, i) => {
                           return (
                             <TableRow key={i + 20} className="text-left">
-                              <TableCell>{metal.material}</TableCell>
+                              <TableCell>{metal.nombre}</TableCell>
                               <TableCell>{metal.medida}</TableCell>
-                              <TableCell>{metal.valor}</TableCell>
+                              <TableCell>{metal.cantidad}</TableCell>
                               {price ? (
                                 <TableCell>
                                   <NumericFormat
