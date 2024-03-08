@@ -61,7 +61,7 @@ const Result = () => {
       const priceInfoOne = materials?.values?.map((material) => ({
         nombre: material.nombre,
         medida: datosJson[material.tipo][material.nombre].medida,
-        cantidad: Math.round(
+        cantidad: Math.ceil(
           datosJson[material.tipo][material.nombre].valor *
             materials.metrocuadrado *
             (materials.desperdicio > 0
@@ -77,7 +77,7 @@ const Result = () => {
       const priceInfoTwo = datosJson?.complementos?.map((complemento) => ({
         nombre: complemento.material,
         medida: complemento.medida,
-        cantidad: Math.round(
+        cantidad: Math.ceil(
           complemento.valor *
             materials.metrocuadrado *
             (materials.desperdicio > 0
@@ -101,7 +101,7 @@ const Result = () => {
                 return {
                   nombre: metal.material,
                   medida: metal.medida,
-                  cantidad: Math.round(
+                  cantidad: Math.ceil(
                     metal.valor *
                       materials.metrocuadrado *
                       (materials.desperdicio > 0
@@ -121,7 +121,7 @@ const Result = () => {
                 return {
                   nombre: metal.material,
                   medida: metal.medida,
-                  cantidad: Math.round(
+                  cantidad: Math.ceil(
                     metal.valor *
                       materials.metrocuadrado *
                       (materials.desperdicio > 0
@@ -136,7 +136,7 @@ const Result = () => {
               return {
                 nombre: metal.material,
                 medida: metal.medida,
-                cantidad: Math.round(
+                cantidad: Math.ceil(
                   metal.valor *
                     materials.metrocuadrado *
                     (materials.desperdicio > 0
@@ -264,7 +264,6 @@ const Result = () => {
 
     window.open(`${window.location.origin}${window.location.pathname}#/PdfView`);
   };
-  console.log(  materials );
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
