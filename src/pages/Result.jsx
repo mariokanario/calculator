@@ -58,65 +58,82 @@ const Result = () => {
   useEffect(() => {
     const datosJson = data();
     if (datosJson) {
-      const priceInfoOne = materials?.values?.map((material) => ({
-        nombre: material.nombre,
-        medida: datosJson[material.tipo][material.nombre].medida,
-        cantidad: Math.ceil(
-          datosJson[material.tipo][material.nombre].valor *
-            materials.metrocuadrado *
-            (materials.desperdicio > 0
-              ? parseInt(materials.desperdicio) / 100 + 1
-              : 1)
-        ),
-        precio: 0,
-        subtotal: 0,
-        tipo: material.tipo == "placa" ? "Tipo Placa" : material.tipo
-      }));
+      const priceInfoOne = materials?.values?.map((material) => {
+        let type = material.tipo;
+        if (material.tipo == "placa") {
+          type = "Tipo Placa";
+        } else if (material.tipo == "suspencion") {
+          type = "Suspención";
+        } else if (material.tipo == "acabado") {
+          type = "Nivel de acabado";
+        }
+        return {
+          nombre: material.nombre,
+          medida: datosJson[material.tipo][material.nombre].medida,
+          cantidad: Math.ceil(
+            datosJson[material.tipo][material.nombre].valor *
+              materials.metrocuadrado *
+              (materials.desperdicio > 0
+                ? parseInt(materials.desperdicio) / 100 + 1
+                : 1)
+          ),
+          precio: 0,
+          subtotal: 0,
+          tipo: type,
+        };
+      });
       setMateriales(priceInfoOne);
 
-      const priceInfoTwo = datosJson?.complementos?.map((complemento) => ({
-        nombre: complemento.material,
-        medida: complemento.medida,
-        cantidad: Math.ceil(
-          complemento.valor *
-            materials.metrocuadrado *
-            (materials.desperdicio > 0
-              ? parseInt(materials.desperdicio) / 100 + 1
-              : 1)
-        ),
-        precio: 0,
-        subtotal: 0,
-      }));
+      const priceInfoTwo = datosJson?.complementos?.map((complemento) => {
+        if (complemento?.equal?.length > 0) {
+          if (
+            complemento?.equal.find(
+              (mm) =>
+                mm == materials?.values.find((e) => e.tipo == "acabado").nombre
+            )
+          ) {
+            return {
+              nombre: complemento.material,
+              medida: complemento.medida,
+              cantidad: Math.ceil(
+                complemento.valor *
+                  materials.metrocuadrado *
+                  (materials.desperdicio > 0
+                    ? parseInt(materials.desperdicio) / 100 + 1
+                    : 1)
+              ),
+              precio: 0,
+              subtotal: 0,
+            };
+          }
+        } else {
+          return {
+            nombre: complemento.material,
+            medida: complemento.medida,
+            cantidad: Math.ceil(
+              complemento.valor *
+                materials.metrocuadrado *
+                (materials.desperdicio > 0
+                  ? parseInt(materials.desperdicio) / 100 + 1
+                  : 1)
+            ),
+            precio: 0,
+            subtotal: 0,
+          };
+        }
+      });
       setComplementos(priceInfoTwo);
-      // console.log(datosJson?.metales)
+
       if (datosJson?.metales) {
         const priceInfoThree = datosJson?.metales
           ?.map((metal) => {
             if (metal?.equal?.length > 0) {
               if (
-                metal?.equal?.length == 1 &&
-                metal?.equal[0] ==
-                  materials?.values.find((e) => e.tipo == "aislante").nombre
-              ) {
-                return {
-                  nombre: metal.material,
-                  medida: metal.medida,
-                  cantidad: Math.ceil(
-                    metal.valor *
-                      materials.metrocuadrado *
-                      (materials.desperdicio > 0
-                        ? parseInt(materials.desperdicio) / 100 + 1
-                        : 1)
-                  ),
-                  precio: 0,
-                  subtotal: 0,
-                };
-              } else if (
-                metal?.equal?.length == 2 &&
-                (metal?.equal[0] ==
-                  materials?.values.find((e) => e.tipo == "aislante").nombre ||
-                  metal?.equal[1] !=
-                    materials?.values.find((e) => e.tipo == "aislante").nombre)
+                metal?.equal.find(
+                  (mm) =>
+                    mm ==
+                    materials?.values.find((e) => e.tipo == "aislante").nombre
+                )
               ) {
                 return {
                   nombre: metal.material,
@@ -150,19 +167,17 @@ const Result = () => {
             return null;
           })
           .filter((e) => e);
-          // console.log("-------", priceInfoThree);
+        // console.log("-------", priceInfoThree);
         setMetales(priceInfoThree);
-      } 
+      }
     }
   }, [materials]);
 
   useEffect(() => {
-    if(materiales?.length > 0 && complementos?.length > 0){
-      sendDataServer(materiales, complementos, metales).then(
-        (e) => {}
-      );
+    if (materiales?.length > 0 && complementos?.length > 0) {
+      sendDataServer(materiales, complementos, metales).then((e) => {});
     }
-  }, [materiales, complementos])
+  }, [materiales, complementos]);
 
   useEffect(() => {
     let tempTotalPriceMat = materiales
@@ -172,12 +187,12 @@ const Result = () => {
       : 0;
     let tempTotalPriceCom = complementos
       ? complementos
-          ?.map((e) => e.subtotal)
+          ?.map((e) => e?.subtotal ?? 0)
           .reduce((acumulador, valorActual) => acumulador + valorActual, 0)
       : 0;
     let tempTotalPriceMet = metales
       ? metales
-          ?.map((e) => e.subtotal)
+          ?.map((e) => e?.subtotal ?? 0)
           .reduce((acumulador, valorActual) => acumulador + valorActual, 0)
       : 0;
     setTotalPrice(tempTotalPriceMat + tempTotalPriceCom + tempTotalPriceMet);
@@ -194,13 +209,16 @@ const Result = () => {
       project_type: userData.typeProject,
       items: [...material, ...complement, ...metales],
     };
-    const response = await fetch(`${window.location.origin}${window.location.pathname}src/index.php?option=create_seco`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${window.location.origin}${window.location.pathname}src/index.php?option=create_seco`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return response.json();
   };
 
@@ -256,13 +274,15 @@ const Result = () => {
         totalPrice,
         values: {
           materiales: [...materiales],
-          complementos: [...complementos],
-          metales: [...metales]
+          complementos: complementos ? [...complementos] : [],
+          metales: metales ? [...metales] : [],
         },
       },
     });
 
-    window.open(`${window.location.origin}${window.location.pathname}#/PdfView`);
+    window.open(
+      `${window.location.origin}${window.location.pathname}#/PdfView`
+    );
   };
 
   return (
@@ -391,7 +411,12 @@ const Result = () => {
                   <TableBody>
                     {materiales?.map((material, i) => (
                       <TableRow key={i} className="text-left">
-                        <TableCell><span className="font-bold capitalize">{material.tipo}:</span> {material.nombre}</TableCell>
+                        <TableCell>
+                          <span className="font-bold capitalize">
+                            {material.tipo}:
+                          </span>{" "}
+                          {material.nombre}
+                        </TableCell>
                         <TableCell>{material.medida}</TableCell>
                         <TableCell>{material.cantidad}</TableCell>
                         {price ? (
@@ -427,7 +452,7 @@ const Result = () => {
                     ) : null}
 
                     {complementos && complementos?.length > 0
-                      ? complementos.map((complemento, i) => (
+                      ? complementos.map((complemento, i) => ( complemento ?
                           <TableRow key={i + 10} className="text-left">
                             <TableCell>{complemento.nombre}</TableCell>
                             <TableCell>{complemento.medida}</TableCell>
@@ -452,7 +477,7 @@ const Result = () => {
                             ) : (
                               <TableCell></TableCell>
                             )}
-                          </TableRow>
+                          </TableRow> : null
                         ))
                       : null}
 
@@ -470,7 +495,7 @@ const Result = () => {
                     {metales && metales?.length > 0
                       ? metales.map((metal, i) => {
                           return (
-                            <TableRow key={i + 20} className="text-left">
+                            metal ? <TableRow key={i + 20} className="text-left">
                               <TableCell>{metal.nombre}</TableCell>
                               <TableCell>{metal.medida}</TableCell>
                               <TableCell>{metal.cantidad}</TableCell>
@@ -494,7 +519,7 @@ const Result = () => {
                               ) : (
                                 <TableCell></TableCell>
                               )}
-                            </TableRow>
+                            </TableRow> : null
                           );
                         })
                       : null}
