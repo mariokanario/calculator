@@ -188,59 +188,6 @@ const CielorasosCorridos = () => {
                             </>
                         }
                     </RadioGroup>
-
-
-
-                    <RadioGroup
-                        size="lg"
-                        id="acabado"
-                        defaultValue={acabado}
-                        onChange={({ target }) => {
-                            formik.setFieldValue("acabado", target.value)
-                            addElement("acabado", target.value)
-
-                        }}
-                    >
-                        {
-                            option == "exterior" &&
-                            <>
-                                <h2 className='title-radio'>Nivel de acabado</h2>
-
-                                {
-                                    Object.keys(cielorasoCorridoExt?.acabado)?.map(aca => (
-                                        <Radio value={aca}>{aca}</Radio>
-                                    ))
-                                }
-                                {/* <Radio value="RD + MIX" onChange={(e) => setLevel(e.target.value)}>RD + MIX</Radio> */}
-                                {formik.touched.acabado && formik.errors.acabado && (
-                                    <small className="text-danger">{formik.errors.acabado}</small>
-                                )}
-                            </>
-                        }
-                        {
-                            level == "RD + MIX" &&
-                            <Slider
-                                color="primary"
-                                size="md"
-                                label=" "
-                                minValue={0}
-                                maxValue={5}
-                                showSteps={true}
-                                marks={[
-                                    { value: 0, label: "0", },
-                                    { value: 1, label: "1", },
-                                    { value: 2, label: "2", },
-                                    { value: 3, label: "3", },
-                                    { value: 4, label: "4", },
-                                    { value: 5, label: "5", },
-
-                                ]}
-                                className="max-w-md"
-                            />
-                        }
-                    </RadioGroup>
-
-
                 </div>
                 <div className='flex justify-center gap-5'>
                     <Button size="lg" className='my-8' color="primary" variant="faded" onPress={() => navigate(-1)}>

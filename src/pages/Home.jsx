@@ -10,7 +10,7 @@ const Home = () => {
 
     const navigate = useNavigate();
 
-    const { setUserData } = useProvider()
+    const { setUserData, userData } = useProvider()
 
     const [agree, setAgree] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -48,7 +48,7 @@ const Home = () => {
 
 
     const formik = useFormik({
-        initialValues: {
+        initialValues: userData ?? {
             name: "",
             typeDocument: "",
             document: "",
@@ -112,7 +112,7 @@ const Home = () => {
                                 label="Tipo de documento"
                                 id="typeDocument"
                                 name="typeDocument"
-                                value={typeDocument}
+                                defaultSelectedKeys={[typeDocument]}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 errorMessage={formik.errors.typeDocument && ( isSubmitting) ? formik.errors.typeDocument : null}
@@ -168,7 +168,7 @@ const Home = () => {
                                 label="Tipo de proyecto"
                                 id="typeProject"
                                 name="typeProject"
-                                value={typeProject}
+                                defaultSelectedKeys={[typeProject]}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 errorMessage={formik.errors.typeProject && ( isSubmitting) ? formik.errors.typeProject : null}
@@ -206,7 +206,7 @@ const Home = () => {
                         </div>
                         <Button
 
-                            isDisabled={agree == false && true}
+                            isDisabled={agree == false}
                             type='submit'
                             size="lg"
                             className='my-8'

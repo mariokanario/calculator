@@ -6,18 +6,18 @@ import {
   View,
   Text,
   StyleSheet,
-  Font
+  Font,
 } from "@react-pdf/renderer";
-import MyFontNormal from '../../../public/fonts/Gotham-Book.otf'
-import MyFontBold from '../../../public/fonts/Gotham-Bold.otf'
+import MyFontNormal from "../../../public/fonts/Gotham-Book.otf";
+import MyFontBold from "../../../public/fonts/Gotham-Bold.otf";
 import { useProvider } from "../context/Provider";
 
-
 Font.register({
-  family: 'Gotham', fonts: [
-    { src: MyFontNormal, fontStyle: 'normal' }, // font-style: normal, font-weight: normal
-    { src: MyFontBold, fontWeight: 'bold' },
-  ]
+  family: "Gotham",
+  fonts: [
+    { src: MyFontNormal, fontStyle: "normal" }, // font-style: normal, font-weight: normal
+    { src: MyFontBold, fontWeight: "bold" },
+  ],
 });
 
 const DocuPDF = () => {
@@ -31,26 +31,26 @@ const DocuPDF = () => {
     },
     title: {
       fontSize: "12px",
-      fontFamily: 'Gotham',
-      fontWeight: 'bold',
+      fontFamily: "Gotham",
+      fontWeight: "bold",
     },
     titleThead: {
       fontSize: "11px",
-      fontFamily: 'Gotham',
-      fontWeight: 'bold',
+      fontFamily: "Gotham",
+      fontWeight: "bold",
     },
     titleOther: {
       fontSize: "12px",
       margin: "5px",
-      backgroundColor: 'white'
+      backgroundColor: "white",
     },
     paragraph: {
-      fontFamily: 'Gotham',
+      fontFamily: "Gotham",
       fontSize: "10px",
       fontWeight: "normal",
     },
     paragraphNote: {
-      fontFamily: 'Gotham',
+      fontFamily: "Gotham",
       fontSize: "9px",
       fontWeight: "normal",
     },
@@ -73,7 +73,7 @@ const DocuPDF = () => {
       flexWrap: "nowrap",
       justifyContent: "flex-start",
       border: "solid 1px black",
-      backgroundColor: 'white'
+      backgroundColor: "white",
     },
     tableTh: {
       width: "25%",
@@ -110,11 +110,13 @@ const DocuPDF = () => {
             padding: "0 20px",
           }}
         >
-          <Text style={{
-            margin: "0 0 10px 0",
-            fontFamily: 'Gotham',
-            fontWeight: 'bold',
-          }}>
+          <Text
+            style={{
+              margin: "0 0 10px 0",
+              fontFamily: "Gotham",
+              fontWeight: "bold",
+            }}
+          >
             Cálculo construcción en seco
           </Text>
           <View style={styles.sectionOne}>
@@ -213,12 +215,10 @@ const DocuPDF = () => {
               </View>
             </View>
           ))}
-          {
-            data.materials.values.complementos.length > 0 &&
+          {data.materials.values.complementos.length > 0 && (
             <Text style={styles.titleOther}> Complementos </Text>
-          }
-          {
-            data.materials.values.complementos.length > 0 &&
+          )}
+          {data.materials.values.complementos.length > 0 &&
             data.materials.values.complementos.map((val) => (
               <View style={styles.sectionTwo}>
                 <View style={styles.tableTh}>
@@ -231,16 +231,17 @@ const DocuPDF = () => {
                   <Text style={styles.paragraph}> {val.cantidad} </Text>
                 </View>
                 <View style={styles.tableTh}>
-                  <Text style={styles.paragraph}> {f.format(val.subtotal)} </Text>
+                  <Text style={styles.paragraph}>
+                    {" "}
+                    {f.format(val.subtotal)}{" "}
+                  </Text>
                 </View>
               </View>
             ))}
-          {
-            data.materials.values.metales.length > 0 &&
+          {data.materials.values.metales.length > 0 && (
             <Text style={styles.titleOther}> Metales </Text>
-          }
-          {
-            data.materials.values.metales.length > 0 &&
+          )}
+          {data.materials.values.metales.length > 0 &&
             data.materials.values.metales.map((val) => (
               <View style={styles.sectionTwo}>
                 <View style={styles.tableTh}>
@@ -253,7 +254,34 @@ const DocuPDF = () => {
                   <Text style={styles.paragraph}> {val.cantidad} </Text>
                 </View>
                 <View style={styles.tableTh}>
-                  <Text style={styles.paragraph}> {f.format(val.subtotal)} </Text>
+                  <Text style={styles.paragraph}>
+                    {" "}
+                    {f.format(val.subtotal)}{" "}
+                  </Text>
+                </View>
+              </View>
+            ))}
+
+          {data.materials.values.suspencion.length > 0 && (
+            <Text style={styles.titleOther}> Suspensión </Text>
+          )}
+          {data.materials.values.suspencion.length > 0 &&
+            data.materials.values.suspencion.map((val) => (
+              <View style={styles.sectionTwo}>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.nombre} </Text>
+                </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.medida} </Text>
+                </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.cantidad} </Text>
+                </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}>
+                    {" "}
+                    {f.format(val.subtotal)}{" "}
+                  </Text>
                 </View>
               </View>
             ))}

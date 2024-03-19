@@ -60,11 +60,11 @@
     }
   },
   "aislante": {
-    "Frescasa Eco 2,5": {
+    "Frescasa Eco 2,5\"": {
       "medida": "Rollo",
       "valor": 0.11111
     },
-    "Frescasa Eco 3,5": {
+    "Frescasa Eco 3,5\"": {
       "medida": "Rollo",
       "valor": 0.11111
     },
@@ -80,11 +80,11 @@
       "medida": "Lámina",
       "valor": 0.81967
     },
-    "Black Theater 1": {
+    "Black Theater 1\"": {
       "medida": "Lámina",
       "valor": 0.33557
     },
-    "Black Theater 2": {
+    "Black Theater 2\"": {
       "medida": "Lámina",
       "valor": 0.33557
     }
@@ -149,7 +149,15 @@
     {
       "material": "Paral base 6 (2,44 m)",
       "medida": "Und",
-      "valor": 0.76
+      "valor": 0.76,
+      "equal": [
+        "Frescasa Eco 2,5",
+        "Isover Arena",
+        "Acustifibra",
+        "Acustic Control VP",
+        "Black Theater 1",
+        "Black Theater 2"
+      ]
     },
     {
       "material": "Canal base 9 (2,44 m)",
@@ -160,7 +168,8 @@
     {
       "material": "Paral base 9 (2,44 m)",
       "medida": "Und",
-      "valor": 0.76
+      "valor": 0.76,
+      "equal": ["Frescasa Eco 3,5"]
     }
   ]
 }

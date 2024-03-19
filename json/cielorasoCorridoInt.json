@@ -61,7 +61,7 @@
     {
       "material": "Pintura a 2 manos (galón)",
       "medida": "Gl",
-      "valor": 0.01
+      "valor": 0.05
     },
     {
       "material": "Lija # 150 (pliego)",
@@ -82,22 +82,22 @@
   "metales": [
     {
       "material": "Angulo perimetral (2,44 m)",
-      "medida": "Un",
+      "medida": "Und",
       "valor": 1.6
     },
     {
       "material": "Perfil paral (2,44 m)",
-      "medida": "Un",
+      "medida": "Und",
       "valor": 0.82
     },
     {
       "material": "Perfil Omega (2,44)",
-      "medida": "Un",
+      "medida": "Und",
       "valor": 1.02
     },
     {
       "material": "Angulo de cuelga (2,44)",
-      "medida": "Un",
+      "medida": "Und",
       "valor": 0.2
     }
   ]

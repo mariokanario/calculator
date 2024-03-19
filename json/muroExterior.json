@@ -137,7 +137,8 @@
     {
       "material": "Paral base 6 (2,44 m)",
       "medida": "Und",
-      "valor": 0.76
+      "valor": 0.76,
+      "equal": ["Isover Arena 60 (rollos 12,4 m2)"]
     },
     {
       "material": "Canal base 9 (2,44 m)",
@@ -148,7 +149,8 @@
     {
       "material": "Paral base 9 (2,44 m)",
       "medida": "Und",
-      "valor": 0.76
+      "valor": 0.76,
+      "equal": ["Ecovent 80 (laminas 0,81m2)"]
     }
   ]
 }

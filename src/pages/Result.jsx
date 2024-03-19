@@ -17,12 +17,6 @@ import { MdAttachEmail } from "react-icons/md";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Transition from "../components/Transition";
 import { useProvider } from "./../components/context/Provider";
-// import datosCielorasoCorridoInt from "./../../json/cielorasoCorridoInt.json";
-// import datosCielorasoCorridoExt from "./../../json/cielorasoCorridoExt.json";
-// import datosCielorasoReticular from "./../../json/cielorasoReticular.json";
-// import datosMuroInterior from "./../../json/muroInterior.json";
-// import datosMuroExterior from "./../../json/muroExterior.json";
-// import whatsapp from "./../../json/whatsapp.json";
 import { useNavigate } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
 
@@ -37,10 +31,9 @@ const Result = () => {
   });
 
   const {
+    setUserData,
     materials,
     userData,
-    totalData,
-    setTotalData,
     cielorasoCorridoExt: datosCielorasoCorridoExt,
     cielorasoCorridoInt: datosCielorasoCorridoInt,
     cielorasoReticular: datosCielorasoReticular,
@@ -49,14 +42,17 @@ const Result = () => {
     whatsapp,
   } = useProvider();
 
+  const [sendData, setSendData] = useState(false);
   const [price, setPrice] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [complementos, setComplementos] = useState([]);
   const [materiales, setMateriales] = useState([]);
   const [metales, setMetales] = useState([]);
+  const [suspencion, setSuspencion] = useState([]);
 
   useEffect(() => {
     const datosJson = data();
+
     if (datosJson) {
       const priceInfoOne = materials?.values?.map((material) => {
         let type = material.tipo;
@@ -170,12 +166,40 @@ const Result = () => {
         // console.log("-------", priceInfoThree);
         setMetales(priceInfoThree);
       }
+
+      if (datosJson?.suspencion) {
+        const priceInfoFour = datosJson?.suspencion?.map((susp) => {
+          return {
+            nombre: susp.material,
+            medida: susp.medida,
+            cantidad: Math.ceil(
+              susp.valor *
+                materials.metrocuadrado *
+                (materials.desperdicio > 0
+                  ? parseInt(materials.desperdicio) / 100 + 1
+                  : 1)
+            ),
+            precio: 0,
+            subtotal: 0,
+          };
+        });
+        setSuspencion(priceInfoFour);
+      }
     }
   }, [materials]);
 
   useEffect(() => {
-    if (materiales?.length > 0 && complementos?.length > 0) {
-      sendDataServer(materiales, complementos, metales).then((e) => {});
+    if (
+      materiales?.length > 0 &&
+      !sendData &&
+      (complementos?.length > 0 ||
+        metales?.length > 0 ||
+        suspencion?.length > 0)
+    ) {
+      sendDataServer(materiales, complementos, metales, suspencion).then(
+        (e) => {}
+      );
+      setSendData(true);
     }
   }, [materiales, complementos]);
 
@@ -195,10 +219,20 @@ const Result = () => {
           ?.map((e) => e?.subtotal ?? 0)
           .reduce((acumulador, valorActual) => acumulador + valorActual, 0)
       : 0;
-    setTotalPrice(tempTotalPriceMat + tempTotalPriceCom + tempTotalPriceMet);
-  }, [materiales, complementos, metales]);
+    let tempTotalPriceMSuspen = suspencion
+      ? suspencion
+          ?.map((e) => e?.subtotal ?? 0)
+          .reduce((acumulador, valorActual) => acumulador + valorActual, 0)
+      : 0;
+    setTotalPrice(
+      tempTotalPriceMat +
+        tempTotalPriceCom +
+        tempTotalPriceMet +
+        tempTotalPriceMSuspen
+    );
+  }, [materiales, complementos, metales, suspencion]);
 
-  const sendDataServer = async (material, complement, metales) => {
+  const sendDataServer = async (material, complement, metales, suspencion) => {
     const data = {
       name: userData.name,
       document_type: userData.typeDocument,
@@ -207,7 +241,7 @@ const Result = () => {
       cellphone: userData.cellphone,
       project_name: userData.nameProject,
       project_type: userData.typeProject,
-      items: [...material, ...complement, ...metales],
+      items: [...material, ...(complement ?? []), ...(metales ?? []), ...(suspencion ?? [])],
     };
     const response = await fetch(
       `${window.location.origin}${window.location.pathname}src/index.php?option=create_seco`,
@@ -223,6 +257,9 @@ const Result = () => {
   };
 
   const manejarCambio = (nombre, valor, grupo) => {
+    if (!valor || valor == "NaN") {
+      valor = 0;
+    }
     if (grupo === 1) {
       const data = materiales;
       const index = data.findIndex((e) => e.nombre == nombre);
@@ -241,6 +278,12 @@ const Result = () => {
       data[index].precio = valor;
       data[index].subtotal = valor * data[index].cantidad;
       setMetales([...data]);
+    } else if (grupo === 4) {
+      const data = suspencion;
+      const index = data.findIndex((e) => e.nombre == nombre);
+      data[index].precio = valor;
+      data[index].subtotal = valor * data[index].cantidad;
+      setSuspencion([...data]);
     }
   };
 
@@ -264,8 +307,6 @@ const Result = () => {
     if (materials.tipo == "Muro Facahada") return datosMuroExterior;
   };
 
-  /* PDF */
-
   const createPdf = () => {
     localStorage.pdf = JSON.stringify({
       userData,
@@ -276,6 +317,7 @@ const Result = () => {
           materiales: [...materiales],
           complementos: complementos ? [...complementos] : [],
           metales: metales ? [...metales] : [],
+          suspencion: suspencion ? [...suspencion] : [],
         },
       },
     });
@@ -406,6 +448,11 @@ const Result = () => {
                     ) : (
                       <TableColumn></TableColumn>
                     )}
+                    {price ? (
+                      <TableColumn>Sub Total</TableColumn>
+                    ) : (
+                      <TableColumn></TableColumn>
+                    )}
                   </TableHeader>
 
                   <TableBody>
@@ -422,16 +469,31 @@ const Result = () => {
                         {price ? (
                           <TableCell>
                             <NumericFormat
+                              min={100}
+                              max={1000000}
                               prefix="$ "
                               thousandSeparator="."
                               decimalSeparator=","
                               customInput={Input}
                               defaultValue={0}
-                              onValueChange={(e) =>
-                                manejarCambio(material.nombre, e.floatValue, 1)
-                              }
+                              onValueChange={(e) => {
+                                try {
+                                  manejarCambio(
+                                    material.nombre,
+                                    parseFloat(e.floatValue),
+                                    1
+                                  );
+                                } catch (e) {
+                                  manejarCambio(material.nombre, 0, 1);
+                                }
+                              }}
                             />
                           </TableCell>
+                        ) : (
+                          <TableCell></TableCell>
+                        )}
+                        {price ? (
+                          <TableCell>{f.format(material.subtotal)}</TableCell>
                         ) : (
                           <TableCell></TableCell>
                         )}
@@ -448,37 +510,51 @@ const Result = () => {
                         <TableCell></TableCell>
                         <TableCell></TableCell>
                         <TableCell></TableCell>
+                        <TableCell></TableCell>
                       </TableRow>
                     ) : null}
 
                     {complementos && complementos?.length > 0
-                      ? complementos.map((complemento, i) => ( complemento ?
-                          <TableRow key={i + 10} className="text-left">
-                            <TableCell>{complemento.nombre}</TableCell>
-                            <TableCell>{complemento.medida}</TableCell>
-                            <TableCell>{complemento.cantidad}</TableCell>
-                            {price ? (
-                              <TableCell>
-                                <NumericFormat
-                                  prefix="$ "
-                                  thousandSeparator="."
-                                  decimalSeparator=","
-                                  customInput={Input}
-                                  defaultValue={0}
-                                  onValueChange={(e) =>
-                                    manejarCambio(
-                                      complemento.nombre,
-                                      e.floatValue,
-                                      2
-                                    )
-                                  }
-                                />
-                              </TableCell>
-                            ) : (
-                              <TableCell></TableCell>
-                            )}
-                          </TableRow> : null
-                        ))
+                      ? complementos.map((complemento, i) =>
+                          complemento ? (
+                            <TableRow key={i + 10} className="text-left">
+                              <TableCell>{complemento.nombre}</TableCell>
+                              <TableCell>{complemento.medida}</TableCell>
+                              <TableCell>{complemento.cantidad}</TableCell>
+                              {price ? (
+                                <TableCell>
+                                  <NumericFormat
+                                    prefix="$ "
+                                    thousandSeparator="."
+                                    decimalSeparator=","
+                                    customInput={Input}
+                                    defaultValue={0}
+                                    onValueChange={(e) => {
+                                      try {
+                                        manejarCambio(
+                                          complemento.nombre,
+                                          parseFloat(e.floatValue),
+                                          2
+                                        );
+                                      } catch (e) {
+                                        manejarCambio(complemento.nombre, 0, 2);
+                                      }
+                                    }}
+                                  />
+                                </TableCell>
+                              ) : (
+                                <TableCell></TableCell>
+                              )}
+                              {price ? (
+                                <TableCell>
+                                  {f.format(complemento.subtotal)}
+                                </TableCell>
+                              ) : (
+                                <TableCell></TableCell>
+                              )}
+                            </TableRow>
+                          ) : null
+                        )
                       : null}
 
                     {metales && metales?.length > 0 ? (
@@ -489,13 +565,14 @@ const Result = () => {
                         <TableCell></TableCell>
                         <TableCell></TableCell>
                         <TableCell></TableCell>
+                        <TableCell></TableCell>
                       </TableRow>
                     ) : null}
 
                     {metales && metales?.length > 0
                       ? metales.map((metal, i) => {
-                          return (
-                            metal ? <TableRow key={i + 20} className="text-left">
+                          return metal ? (
+                            <TableRow key={i + 20} className="text-left">
                               <TableCell>{metal.nombre}</TableCell>
                               <TableCell>{metal.medida}</TableCell>
                               <TableCell>{metal.cantidad}</TableCell>
@@ -507,20 +584,86 @@ const Result = () => {
                                     decimalSeparator=","
                                     customInput={Input}
                                     defaultValue={0}
-                                    onValueChange={(e) =>
-                                      manejarCambio(
-                                        complemento.nombre,
-                                        e.floatValue,
-                                        3
-                                      )
-                                    }
+                                    onValueChange={(e) => {
+                                      try {
+                                        manejarCambio(
+                                          metal.nombre,
+                                          parseFloat(e.floatValue),
+                                          3
+                                        );
+                                      } catch (e) {
+                                        manejarCambio(metal.nombre, 0, 3);
+                                      }
+                                    }}
                                   />
                                 </TableCell>
                               ) : (
                                 <TableCell></TableCell>
                               )}
-                            </TableRow> : null
-                          );
+                              {price ? (
+                                <TableCell>
+                                  {f.format(metal.subtotal)}
+                                </TableCell>
+                              ) : (
+                                <TableCell></TableCell>
+                              )}
+                            </TableRow>
+                          ) : null;
+                        })
+                      : null}
+
+                    {suspencion && suspencion?.length > 0 ? (
+                      <TableRow key={101} className="text-left">
+                        <TableCell>
+                          <h2 className="font-semibold text-base">
+                            Suspensión
+                          </h2>
+                        </TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                      </TableRow>
+                    ) : null}
+
+                    {suspencion && suspencion?.length > 0
+                      ? suspencion.map((susp, i) => {
+                          return susp ? (
+                            <TableRow key={i + 20} className="text-left">
+                              <TableCell>{susp.nombre}</TableCell>
+                              <TableCell>{susp.medida}</TableCell>
+                              <TableCell>{susp.cantidad}</TableCell>
+                              {price ? (
+                                <TableCell>
+                                  <NumericFormat
+                                    prefix="$ "
+                                    thousandSeparator="."
+                                    decimalSeparator=","
+                                    customInput={Input}
+                                    defaultValue={0}
+                                    onValueChange={(e) => {
+                                      try {
+                                        manejarCambio(
+                                          susp.nombre,
+                                          parseFloat(e.floatValue),
+                                          4
+                                        );
+                                      } catch (e) {
+                                        manejarCambio(susp.nombre, 0, 4);
+                                      }
+                                    }}
+                                  />
+                                </TableCell>
+                              ) : (
+                                <TableCell></TableCell>
+                              )}
+                              {price ? (
+                                <TableCell>{f.format(susp.subtotal)}</TableCell>
+                              ) : (
+                                <TableCell></TableCell>
+                              )}
+                            </TableRow>
+                          ) : null;
                         })
                       : null}
 
@@ -529,6 +672,7 @@ const Result = () => {
                         <TableCell>
                           <h2 className="font-semibold text-base">TOTAL</h2>
                         </TableCell>
+                        <TableCell></TableCell>
                         <TableCell></TableCell>
                         <TableCell></TableCell>
                         <TableCell>
@@ -573,10 +717,15 @@ const Result = () => {
               </div>
 
               <Button
+                type="button"
                 className="my-5 bt-new"
                 size="lg"
                 color="primary"
-                onPress={() => navigate("/")}
+                onPress={() => {
+                  console.log(userData);
+                  setUserData(userData);
+                  navigate("/");
+                }}
               >
                 Crear nueva calculadora
               </Button>

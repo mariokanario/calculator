@@ -20,7 +20,7 @@ const CielorasosReticulares = () => {
     const Schema = yup
         .object({
             placa: yup.string().required("Seleccione una opción"),
-            suspencion: yup.string().required("Seleccione una opción"),
+            aislamiento: yup.string().required("Seleccione una opción"),
             desperdicio: yup.string().required("Seleccione una opción"),
         })
         .required();
@@ -28,7 +28,7 @@ const CielorasosReticulares = () => {
     const formik = useFormik({
         initialValues: {
             placa: "",
-            suspencion: "",
+            aislamiento: "",
             desperdicio: ""
         },
         validationSchema: Schema,
@@ -37,7 +37,7 @@ const CielorasosReticulares = () => {
         },
     });
 
-    const { placa, suspencion, desperdicio } = formik.values;
+    const { placa, aislamiento, desperdicio } = formik.values;
 
     const addElement = (tipo, nombre) => {
         let items = materials.values
@@ -67,7 +67,7 @@ const CielorasosReticulares = () => {
                             addElement("placa", target.value)
                         }}
                     >
-                        <h2 className='title-radio'>Tipo</h2>
+                        <h2 className='title-radio'>Cieloraso termo-acústico</h2>
                         {
                             Object.keys(cielorasoReticular?.placa)?.map(pla => (
                                 <Radio value={pla}>{pla}</Radio>
@@ -81,23 +81,23 @@ const CielorasosReticulares = () => {
                     <RadioGroup
                         size="lg"
                         className='mb-8'
-                        id="suspencion"
-                        defaultValue={suspencion}
+                        id="aislamiento"
+                        defaultValue={aislamiento}
                         onChange={({ target }) => {
-                            formik.setFieldValue("suspencion", target.value)
-                            addElement("suspencion", target.value)
+                            formik.setFieldValue("aislamiento", target.value)
+                            addElement("aislamiento", target.value)
                         }
                         }
                     >
-                        <h2 className='title-radio'>Suspención</h2>
+                        <h2 className='title-radio'>Aislamiento interior</h2>
                         {
-                            Object.keys(cielorasoReticular?.suspencion)?.map(sus => (
+                            Object.keys(cielorasoReticular?.aislamiento)?.map(sus => (
                                 <Radio value={sus}>{sus}</Radio>
                             ))
                         }
                        
-                        {formik.touched.suspencion && formik.errors.suspencion && (
-                            <small className="text-danger">{formik.errors.suspencion}</small>
+                        {formik.touched.aislamiento && formik.errors.aislamiento && (
+                            <small className="text-danger">{formik.errors.aislamiento}</small>
                         )
                         }
                     </RadioGroup>

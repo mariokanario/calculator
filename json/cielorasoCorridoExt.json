@@ -37,64 +37,58 @@
     "Isover Arena 40 (rollos 12,4 m2)": {
       "medida": "Rollo",
       "valor": 0.0806
-    }
-  },
-  "acabado": {
-    "Masilla para exteriores": {
-      "medida": "kg",
-      "valor": 1.5
     },
-    "Pintura para revestimiento exterior (galón)": {
-      "medida": "gl",
-      "valor": 0.07
-    },
-    "Cinta Fibra de Vidrio E (90 m)": {
-      "medida": "rollo",
-      "valor": 0.03
-    },
-    "Lija # 150 (pliego)": {
-      "medida": "pliego",
-      "valor": 0.17
-    },
-    "Tornillo para estructura (100 und)": {
-      "medida": "bolsa",
-      "valor": 0.1
-    },
-    "Tornillo #6 de 1\" para lámina (100 und)": {
-      "medida": "bolsa",
-      "valor": 0.15
-    },
-    "Sin Acabado": {
+    "Sin aislante": {
       "medida": "N/A",
       "valor": 0
     }
   },
   "complementos": [
     {
-      "material": "Yeso - metal 26 - 1",
-      "medida": "pz",
-      "valor": 16
+      "material": "Masilla para exteriores",
+      "medida": "Gg",
+      "valor": 1.5
     },
     {
-      "material": "Cinta para Juntas (5cm x 76.2m)",
-      "medida": "ml",
-      "valor": 2.4
+      "material": "Pintura para revestimiento exterior (galón)",
+      "medida": "Gl",
+      "valor": 0.07
+    },
+    {
+      "material": "Cinta Fibra de Vidrio E (90 m)",
+      "medida": "Rollo",
+      "valor": 0.03
+    },
+    {
+      "material": "Lija # 150 (pliego)",
+      "medida": "Pliego",
+      "valor": 0.17
+    },
+    {
+      "material": "Tornillo para estructura (100 und)",
+      "medida": "Bolsa",
+      "valor": 0.1
+    },
+    {
+      "material": "Tornillo #6 de 1\" para lámina (100 und)",
+      "medida": "Bolsa",
+      "valor": 0.15
     }
   ],
   "metales": [
     {
       "material": "Angulo perimetral (2,44 m)",
-      "medida": "Un",
+      "medida": "Und",
       "valor": 1.6
     },
     {
       "material": "perfil paral  (2,44 m)",
-      "medida": "Un",
+      "medida": "Und",
       "valor": 0.82
     },
     {
       "material": "Perfil Omega (2,44)",
-      "medida": "Un",
+      "medida": "Und",
       "valor": 1.02
     }
   ]
