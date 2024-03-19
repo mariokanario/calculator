@@ -1,84 +1,104 @@
 {
-    "placa": {
-        "Placa Light 12.7 mm": {
-            "medida": "mt²",
-            "valor": 1.1
-        },
-        "Placa RH 12.7 mm": {
-            "medida": "mt²",
-            "valor": 1.1
-        },
-        "Placa RH 15.9 mm": {
-            "medida": "mt²",
-            "valor": 1.1
-        },
-        "Placa RF 12.7 mm": {
-            "medida": "mt²",
-            "valor": 1.1
-        },
-        "Placa RF 15.9 mm": {
-            "medida": "mt²",
-            "valor": 1.1
-        },
-        "Placa Anti Moho 12.7 mm": {
-            "medida": "mt²",
-            "valor": 1.1
-        },
-        "Placa Acustik 12 mm": {
-            "medida": "mt²",
-            "valor": 1.1
-        }
+  "placa": {
+    "Placa Light 12.7 mm": {
+      "medida": "Und",
+      "valor": 0.34
     },
-    "aislante": {
-        "Frescasa Eco 2,5 (rollos de 9 m2)": {
-            "medida": "mt²",
-            "valor": 0.1111
-        },
-        "Frescasa Eco 3,5 (rollos de 9 m2)": {
-            "medida": "mt²",
-            "valor": 0.1111
-        },
-        "Isover Arena 60 (rollos 12,4 m2)": {
-            "medida": "mt²",
-            "valor": 0.0806
-        },
-        "Sin aislante": {
-            "medida": "mt²",
-            "valor": 0
-        }
+    "Placa RH 12.7 mm": {
+      "medida": "Und",
+      "valor": 0.34
     },
-    "complementos": [
-        {
-            "material": "Yeso - metal 26 - 1",
-            "medida": "pz",
-            "valor": 16
-        },
-        {
-            "material": "Cinta para Juntas (5cm x 76.2m)",
-            "medida": "ml",
-            "valor": 2.4
-        },
-        {
-            "material": "Aislatech R8 2.5' (61 x 1524cm)",
-            "medida": "mt²",
-            "valor": 1.1
-        }
-    ],
-    "metales": [
-        {
-            "material": "Canal Listón 26 (6.35cm x 3.05m)",
-            "medida": "ml",
-            "valor": 2.3
-        },
-        {
-            "material": "Canaleta Carga 22 (1 5/8'(4.10cm) x 3.05m)",
-            "medida": "ml",
-            "valor": 1.8
-        },
-        {
-            "material": "Ángulo Metálico 20 (1' x 1' x 3.05m)",
-            "medida": "ml",
-            "valor": 1.1
-        }
-    ]
+    "Placa RH 15.9 mm": {
+      "medida": "Und",
+      "valor": 0.34
+    },
+    "Placa RF 12.7 mm": {
+      "medida": "Und",
+      "valor": 0.34
+    },
+    "Placa RF 15.9 mm": {
+      "medida": "Und",
+      "valor": 0.34
+    },
+    "Placa Anti Moho 12.7 mm": {
+      "medida": "Und",
+      "valor": 0.34
+    },
+    "Placa Acustik 12 mm": {
+      "medida": "Und",
+      "valor": 0.34
+    }
+  },
+  "aislante": {
+    "Frescasa Eco 2,5 (rollos de 9 m2)": {
+      "medida": "Rollo",
+      "valor": 0.111
+    },
+    "Frescasa Eco 3,5 (rollos de 9 m2)": {
+      "medida": "Rollo",
+      "valor": 0.111
+    },
+    "Isover Arena 60 (rollos 12,4 m2)": {
+      "medida": "Rollo",
+      "valor": 0.081
+    },
+    "Sin aislante": {
+      "medida": "N/A",
+      "valor": 0
+    }
+  },
+  "complementos": [
+    {
+      "material": "Masilla Acrilica (5 kg)",
+      "medida": "Cuñete",
+      "valor": 0.3
+    },
+    {
+      "material": "Cinta tapa juntas (90 m)",
+      "medida": "Rollo",
+      "valor": 0.03
+    },
+    {
+      "material": "Pintura a 2 manos (galón)",
+      "medida": "Gl",
+      "valor": 0.01
+    },
+    {
+      "material": "Lija # 150 (pliego)",
+      "medida": "Pliego",
+      "valor": 0.17
+    },
+    {
+      "material": "Tornillo para estructura (100 und)",
+      "medida": "Bolsa",
+      "valor": 0.1
+    },
+    {
+      "material": "Tornillo #6 de 1\" para lámina (100 und)",
+      "medida": "Bolsa",
+      "valor": 0.15
+    }
+  ],
+  "metales": [
+    {
+      "material": "Angulo perimetral (2,44 m)",
+      "medida": "Un",
+      "valor": 1.6
+    },
+    {
+      "material": "Perfil paral (2,44 m)",
+      "medida": "Un",
+      "valor": 0.82
+    },
+    {
+      "material": "Perfil Omega (2,44)",
+      "medida": "Un",
+      "valor": 1.02
+    },
+    {
+      "material": "Angulo de cuelga (2,44)",
+      "medida": "Un",
+      "valor": 0.2
+    }
+  ]
 }

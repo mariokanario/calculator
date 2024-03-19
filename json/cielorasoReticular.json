@@ -1,64 +1,50 @@
 {
     "placa": {
         "Placa Sky Clean 60,3 cm x 60,3 cm": {
-            "medida": "mt²",
+            "medida": "Lámina",
             "valor": 2.7548
         },
         "Placa Urban 60,3 cm x 60,3 cm": {
-            "medida": "mt²",
+            "medida": "Lámina",
             "valor": 2.7548
         },
         "Placa Duracustic 1,22m x 0,61 m": {
-            "medida": "mt²",
+            "medida": "Lámina",
             "valor": 1.3661
         },
         "Placa Clouds 1 1, 22 m X 2, 40 m": {
-            "medida": "mt²",
+            "medida": "Lámina",
             "valor": 0.3356
         },
         "Placa Black Theater 1 1, 22 m X 2, 40 m": {
-            "medida": "mt²",
+            "medida": "Lámina",
             "valor": 0.3356
         },
         "Placa Clouds 2 1, 22 m X 2, 40 m": {
-            "medida": "mt²",
+            "medida": "Lámina",
             "valor": 0.3356
         },
         "Placa Black Theater 2 1, 22 m X 2, 40 m": {
-            "medida": "mt²",
+            "medida": "Lámina",
             "valor": 0.3356
         }
     },
     "suspencion": {
-        "T Principal (3.66m)": {
-            "medida": "pz",
+        "Perfil en T Principal (3.66m)": {
+            "medida": "Und",
             "valor": 0.25
         },
-        "T Secundaria (61cm)": {
-            "medida": "pz",
+        "Perdil en T Secundaria (61cm)": {
+            "medida": "Und",
             "valor": 1.42
         },
-        "T Secundaria (1.22m)": {
-            "medida": "pz",
+        "Perfil en T Secundaria (1.22m)": {
+            "medida": "Und",
             "valor": 1.42
         },
-        "Ángulo Perimetral (3.05m)": {
-            "medida": "pz",
-            "valor": 1
-        }
-    },
-    "acabado": {
-        "Masilla Acrilica": {
-            "medida": "Cuñete",
-            "valor": 0.5
-        },
-        "Sin Acabado": {
-            "medida": "N/A",
-            "valor": 0
-        },
-        "5 Plaka Finish": {
-            "medida": "kg/mt²",
-            "valor": 0.1111
+        "Angulo perimetral (2,44 m)": {
+            "medida": "Und",
+            "valor": 1.6
         }
     }
 }
