@@ -6,8 +6,19 @@ import {
   View,
   Text,
   StyleSheet,
+  Font
 } from "@react-pdf/renderer";
+import MyFontNormal from '../../../public/fonts/Gotham-Book.otf'
+import MyFontBold from '../../../public/fonts/Gotham-Bold.otf'
 import { useProvider } from "../context/Provider";
+
+
+Font.register({
+  family: 'Gotham', fonts: [
+    { src: MyFontNormal, fontStyle: 'normal' }, // font-style: normal, font-weight: normal
+    { src: MyFontBold, fontWeight: 'bold' },
+  ]
+});
 
 const DocuPDF = () => {
   const styles = StyleSheet.create({
@@ -20,17 +31,26 @@ const DocuPDF = () => {
     },
     title: {
       fontSize: "12px",
-      fontWeight: '900',
-    }, 
+      fontFamily: 'Gotham',
+      fontWeight: 'bold',
+    },
+    titleThead: {
+      fontSize: "11px",
+      fontFamily: 'Gotham',
+      fontWeight: 'bold',
+    },
     titleOther: {
       fontSize: "12px",
       margin: "5px",
+      backgroundColor: 'white'
     },
     paragraph: {
+      fontFamily: 'Gotham',
       fontSize: "10px",
       fontWeight: "normal",
     },
     paragraphNote: {
+      fontFamily: 'Gotham',
       fontSize: "9px",
       fontWeight: "normal",
     },
@@ -46,6 +66,14 @@ const DocuPDF = () => {
       flexWrap: "nowrap",
       justifyContent: "flex-start",
       border: "solid 1px black",
+    },
+    sectionTwoThead: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "nowrap",
+      justifyContent: "flex-start",
+      border: "solid 1px black",
+      backgroundColor: 'white'
     },
     tableTh: {
       width: "25%",
@@ -82,7 +110,13 @@ const DocuPDF = () => {
             padding: "0 20px",
           }}
         >
-          <Text style={{ margin: "0 0 10px 0" }}>Cálculo construcción en seco</Text>
+          <Text style={{
+            margin: "0 0 10px 0",
+            fontFamily: 'Gotham',
+            fontWeight: 'bold',
+          }}>
+            Cálculo construcción en seco
+          </Text>
           <View style={styles.sectionOne}>
             <View>
               <Text style={styles.title}>Cliente:</Text>
@@ -149,18 +183,18 @@ const DocuPDF = () => {
             padding: "0 20px",
           }}
         >
-          <View style={styles.sectionTwo}>
+          <View style={styles.sectionTwoThead}>
             <View style={styles.tableTh}>
-              <Text style={styles.title}>Material:</Text>
+              <Text style={styles.titleThead}>Material:</Text>
             </View>
             <View style={styles.tableTh}>
-              <Text style={styles.title}>Unidad de medida:</Text>
+              <Text style={styles.titleThead}>Unidad de medida:</Text>
             </View>
             <View style={styles.tableTh}>
-              <Text style={styles.title}>Cantidad:</Text>
+              <Text style={styles.titleThead}>Cantidad:</Text>
             </View>
             <View style={styles.tableTh}>
-              <Text style={styles.title}>Precio por unidad:</Text>
+              <Text style={styles.titleThead}>Precio por unidad:</Text>
             </View>
           </View>
           {data.materials.values.materiales.map((val) => (
@@ -186,42 +220,42 @@ const DocuPDF = () => {
           {
             data.materials.values.complementos.length > 0 &&
             data.materials.values.complementos.map((val) => (
-                <View style={styles.sectionTwo}>
-                  <View style={styles.tableTh}>
-                    <Text style={styles.paragraph}> {val.nombre} </Text>
-                  </View>
-                  <View style={styles.tableTh}>
-                    <Text style={styles.paragraph}> {val.medida} </Text>
-                  </View>
-                  <View style={styles.tableTh}>
-                    <Text style={styles.paragraph}> {val.cantidad} </Text>
-                  </View>
-                  <View style={styles.tableTh}>
-                    <Text style={styles.paragraph}> {f.format(val.subtotal)} </Text>
-                  </View>
+              <View style={styles.sectionTwo}>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.nombre} </Text>
                 </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.medida} </Text>
+                </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.cantidad} </Text>
+                </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {f.format(val.subtotal)} </Text>
+                </View>
+              </View>
             ))}
-            {
+          {
             data.materials.values.metales.length > 0 &&
             <Text style={styles.titleOther}> Metales </Text>
-            }
+          }
           {
             data.materials.values.metales.length > 0 &&
             data.materials.values.metales.map((val) => (
-                <View style={styles.sectionTwo}>
-                  <View style={styles.tableTh}>
-                    <Text style={styles.paragraph}> {val.nombre} </Text>
-                  </View>
-                  <View style={styles.tableTh}>
-                    <Text style={styles.paragraph}> {val.medida} </Text>
-                  </View>
-                  <View style={styles.tableTh}>
-                    <Text style={styles.paragraph}> {val.cantidad} </Text>
-                  </View>
-                  <View style={styles.tableTh}>
-                    <Text style={styles.paragraph}> {f.format(val.subtotal)} </Text>
-                  </View>
+              <View style={styles.sectionTwo}>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.nombre} </Text>
                 </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.medida} </Text>
+                </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {val.cantidad} </Text>
+                </View>
+                <View style={styles.tableTh}>
+                  <Text style={styles.paragraph}> {f.format(val.subtotal)} </Text>
+                </View>
+              </View>
             ))}
           <View style={styles.sectionTwo}>
             <View style={styles.tableTh}>
