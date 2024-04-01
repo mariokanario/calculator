@@ -83,9 +83,10 @@ const Result = () => {
       const priceInfoTwo = datosJson?.complementos?.map((complemento) => {
         if (complemento?.equal?.length > 0) {
           if (
-            complemento?.equal.find(
-              (mm) =>
-                mm == materials?.values.find((e) => e.tipo == "acabado").nombre
+            complemento?.equal.find((mm) =>
+              materials?.values
+                .find((e) => e.tipo == "acabado")
+                .nombre.includes(mm)
             )
           ) {
             return {
@@ -125,10 +126,10 @@ const Result = () => {
           ?.map((metal) => {
             if (metal?.equal?.length > 0) {
               if (
-                metal?.equal.find(
-                  (mm) =>
-                    mm ==
-                    materials?.values.find((e) => e.tipo == "aislante").nombre
+                metal?.equal.find((mm) =>
+                  materials?.values
+                    .find((e) => e.tipo == "aislante")
+                    .nombre.includes(mm)
                 )
               ) {
                 return {
@@ -241,7 +242,12 @@ const Result = () => {
       cellphone: userData.cellphone,
       project_name: userData.nameProject,
       project_type: userData.typeProject,
-      items: [...material, ...(complement ?? []), ...(metales ?? []), ...(suspencion ?? [])],
+      items: [
+        ...material,
+        ...(complement ?? []),
+        ...(metales ?? []),
+        ...(suspencion ?? []),
+      ],
     };
     const response = await fetch(
       `${window.location.origin}${window.location.pathname}src/index.php?option=create_seco`,
@@ -256,31 +262,31 @@ const Result = () => {
     return response.json();
   };
 
-  const manejarCambio = (nombre, valor, grupo) => {
+  const manejarCambio = (index, valor, grupo) => {
     if (!valor || valor == "NaN") {
       valor = 0;
     }
     if (grupo === 1) {
       const data = materiales;
-      const index = data.findIndex((e) => e.nombre == nombre);
+      // const index = data.findIndex((e) => e.nombre == nombre);
       data[index].precio = valor;
       data[index].subtotal = valor * data[index].cantidad;
       setMateriales([...data]);
     } else if (grupo === 2) {
       const data = complementos;
-      const index = data.findIndex((e) => e.nombre == nombre);
+      // const index = data.findIndex((e) => e.nombre == nombre);
       data[index].precio = valor;
       data[index].subtotal = valor * data[index].cantidad;
       setComplementos([...data]);
     } else if (grupo === 3) {
       const data = metales;
-      const index = data.findIndex((e) => e.nombre == nombre);
+      // const index = data.findIndex((e) => e.nombre == nombre);
       data[index].precio = valor;
       data[index].subtotal = valor * data[index].cantidad;
       setMetales([...data]);
     } else if (grupo === 4) {
       const data = suspencion;
-      const index = data.findIndex((e) => e.nombre == nombre);
+      // const index = data.findIndex((e) => e.nombre == nombre);
       data[index].precio = valor;
       data[index].subtotal = valor * data[index].cantidad;
       setSuspencion([...data]);
@@ -321,7 +327,19 @@ const Result = () => {
         },
       },
     });
-
+    console.log({
+      userData,
+      materials: {
+        ...materials,
+        totalPrice,
+        values: {
+          materiales: [...materiales],
+          complementos: complementos ? [...complementos] : [],
+          metales: metales ? [...metales] : [],
+          suspencion: suspencion ? [...suspencion] : [],
+        },
+      },
+    })
     window.open(
       `${window.location.origin}${window.location.pathname}#/PdfView`
     );
@@ -479,12 +497,12 @@ const Result = () => {
                               onValueChange={(e) => {
                                 try {
                                   manejarCambio(
-                                    material.nombre,
+                                    i,
                                     parseFloat(e.floatValue),
                                     1
                                   );
                                 } catch (e) {
-                                  manejarCambio(material.nombre, 0, 1);
+                                  manejarCambio(i, 0, 1);
                                 }
                               }}
                             />
@@ -532,12 +550,12 @@ const Result = () => {
                                     onValueChange={(e) => {
                                       try {
                                         manejarCambio(
-                                          complemento.nombre,
+                                          i,
                                           parseFloat(e.floatValue),
                                           2
                                         );
                                       } catch (e) {
-                                        manejarCambio(complemento.nombre, 0, 2);
+                                        manejarCambio(i, 0, 2);
                                       }
                                     }}
                                   />
@@ -587,12 +605,12 @@ const Result = () => {
                                     onValueChange={(e) => {
                                       try {
                                         manejarCambio(
-                                          metal.nombre,
+                                          i,
                                           parseFloat(e.floatValue),
                                           3
                                         );
                                       } catch (e) {
-                                        manejarCambio(metal.nombre, 0, 3);
+                                        manejarCambio(i, 0, 3);
                                       }
                                     }}
                                   />
@@ -644,12 +662,12 @@ const Result = () => {
                                     onValueChange={(e) => {
                                       try {
                                         manejarCambio(
-                                          susp.nombre,
+                                          i,
                                           parseFloat(e.floatValue),
                                           4
                                         );
                                       } catch (e) {
-                                        manejarCambio(susp.nombre, 0, 4);
+                                        manejarCambio(i, 0, 4);
                                       }
                                     }}
                                   />
@@ -710,8 +728,12 @@ const Result = () => {
                     ventanas.
                   </li>
                   <li>
-                    En esta explosión de insumos solo se indican las cantidades
-                    de perfiles metálicos más no así su dimensión.
+                    En esta lista de insumos solo se indican las cantidades de
+                    perfiles metálicos más no así su dimensión.
+                  </li>
+                  <li>
+                    Fiberglass no se hace responsable de las cantidades, debido
+                    a que esta herramientas nos ofrece un cálculo teórico.
                   </li>
                 </ul>
               </div>

@@ -10,13 +10,12 @@ import {
 } from "@react-pdf/renderer";
 import MyFontNormal from "../../../public/fonts/Gotham-Book.otf";
 import MyFontBold from "../../../public/fonts/Gotham-Bold.otf";
-import { useProvider } from "../context/Provider";
 
 Font.register({
   family: "Gotham",
   fonts: [
-    { src: MyFontNormal, fontStyle: "normal" }, // font-style: normal, font-weight: normal
-    { src: MyFontBold, fontWeight: "bold" },
+    { src: MyFontNormal, fontStyle: "normal", format: "truetype" }, // font-style: normal, font-weight: normal
+    { src: MyFontBold, fontWeight: "bold", format: "truetype" },
   ],
 });
 
@@ -75,16 +74,19 @@ const DocuPDF = () => {
       border: "solid 1px black",
       backgroundColor: "white",
     },
+    tableThE: {
+      width: "60%",
+      border: "1px solid black",
+      padding: "2px 5px",
+    },
     tableTh: {
-      width: "25%",
+      width: "20%",
       border: "1px solid black",
       padding: "2px 5px",
     },
   });
 
-  const f = new Intl.NumberFormat(undefined, {
-    currency: "COP",
-    style: "currency",
+  const f = new Intl.NumberFormat("es-ES", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
@@ -186,22 +188,22 @@ const DocuPDF = () => {
           }}
         >
           <View style={styles.sectionTwoThead}>
-            <View style={styles.tableTh}>
+            <View style={styles.tableThE}>
               <Text style={styles.titleThead}>Material:</Text>
             </View>
             <View style={styles.tableTh}>
-              <Text style={styles.titleThead}>Unidad de medida:</Text>
+              <Text style={styles.titleThead}>Unidad:</Text>
             </View>
             <View style={styles.tableTh}>
               <Text style={styles.titleThead}>Cantidad:</Text>
             </View>
             <View style={styles.tableTh}>
-              <Text style={styles.titleThead}>Precio por unidad:</Text>
+              <Text style={styles.titleThead}>Precio:</Text>
             </View>
           </View>
           {data.materials.values.materiales.map((val) => (
             <View style={styles.sectionTwo}>
-              <View style={styles.tableTh}>
+              <View style={styles.tableThE}>
                 <Text style={styles.paragraph}> {val.nombre} </Text>
               </View>
               <View style={styles.tableTh}>
@@ -221,7 +223,7 @@ const DocuPDF = () => {
           {data.materials.values.complementos.length > 0 &&
             data.materials.values.complementos.map((val) => (
               <View style={styles.sectionTwo}>
-                <View style={styles.tableTh}>
+                <View style={styles.tableThE}>
                   <Text style={styles.paragraph}> {val.nombre} </Text>
                 </View>
                 <View style={styles.tableTh}>
@@ -244,7 +246,7 @@ const DocuPDF = () => {
           {data.materials.values.metales.length > 0 &&
             data.materials.values.metales.map((val) => (
               <View style={styles.sectionTwo}>
-                <View style={styles.tableTh}>
+                <View style={styles.tableThE}>
                   <Text style={styles.paragraph}> {val.nombre} </Text>
                 </View>
                 <View style={styles.tableTh}>
@@ -268,7 +270,7 @@ const DocuPDF = () => {
           {data.materials.values.suspencion.length > 0 &&
             data.materials.values.suspencion.map((val) => (
               <View style={styles.sectionTwo}>
-                <View style={styles.tableTh}>
+                <View style={styles.tableThE}>
                   <Text style={styles.paragraph}> {val.nombre} </Text>
                 </View>
                 <View style={styles.tableTh}>
@@ -317,11 +319,12 @@ const DocuPDF = () => {
             anclaje.
           </Text>
           <Text style={styles.paragraphNote}>
-            No se consideran refuerzos, esquinas ni huecos para ventanas.
+            En esta lista de insumos solo se indican las cantidades de perfiles
+            metálicos más no así su dimensión.
           </Text>
           <Text style={styles.paragraphNote}>
-            En esta explosión de insumos solo se indican las cantidades de
-            perfiles metálicos más no así su dimensión.
+            Fiberglass no se hace responsable de las cantidades, debido a que
+            esta herramientas nos ofrece un cálculo teórico.
           </Text>
         </View>
 
